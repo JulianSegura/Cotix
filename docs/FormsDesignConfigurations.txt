@@ -1,0 +1,7 @@
+General BackgroudColor: White
+General Font: Segoe UI, 12
+
+ReportsFont: Calibri, 12
+
+frmMain
+Size: 1080, 720
