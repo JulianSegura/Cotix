@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Cotix.UI.WinForms
 {
-    public partial class frmMain : Form
+    public partial class BaseForm : Form
     {
-        public frmMain()
+        public BaseForm()
         {
             InitializeComponent();
         }
