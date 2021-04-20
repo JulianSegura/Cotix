@@ -19,12 +19,29 @@ namespace Cotix.UI.WinForms.Products
 
         private void pbProductPicture_MouseEnter(object sender, EventArgs e)
         {
-            llbChangePicture.Visible = true;
+            lblChangePicture.Visible = true;
+            lblChangePicture.Cursor = Cursors.Hand;
         }
 
         private void pbProductPicture_MouseLeave(object sender, EventArgs e)
         {
-            llbChangePicture.Visible = false;
+            lblChangePicture.Visible = false;
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            CleanForm();
+            txtProductCode.Focus();
+        }
+
+        private void CleanForm()
+        {
+            txtProductCode.Clear();
+            txtSpecification.Clear();
+            txtDescription.Clear();
+            txtCost.Clear();
+            txtPrice.Clear();
+            chkDisable.Checked = true;
         }
     }
 }

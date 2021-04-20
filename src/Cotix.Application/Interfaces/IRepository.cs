@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace Cotix.Application.Interfaces
 {
-    interface IRepository<T> where T : BaseEntity
+    public interface IRepository<T> where T : BaseEntity
     {
         T GetById(int id);
         ICollection<T> GetAll();
