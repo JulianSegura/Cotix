@@ -22,7 +22,6 @@ namespace Cotix.UI.WinForms
             BaseForm f1 = new Products.frmProductsIndex() {TopLevel=false,Dock=DockStyle.Fill};
             pnlBody.Controls.Add(f1);
             pnlBody.Tag = f1;//el tag se utiliza para exponer algun contenido que yo quiera hacia afuera de la aplicacion.
-            f1.lblRunningForm.Text = (string)f1.Tag;
             f1.BringToFront();
             f1.Show();
             

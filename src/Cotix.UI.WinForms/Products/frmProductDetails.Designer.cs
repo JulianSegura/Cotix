@@ -44,7 +44,7 @@ namespace Cotix.UI.WinForms.Products
             this.pbProductPicture = new System.Windows.Forms.PictureBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.llbChangePicture = new System.Windows.Forms.LinkLabel();
+            this.lblChangePicture = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbProductPicture)).BeginInit();
             this.SuspendLayout();
             // 
@@ -152,6 +152,8 @@ namespace Cotix.UI.WinForms.Products
             // chkDisable
             // 
             this.chkDisable.AutoSize = true;
+            this.chkDisable.Checked = true;
+            this.chkDisable.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkDisable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkDisable.ForeColor = System.Drawing.Color.LightSlateGray;
             this.chkDisable.Location = new System.Drawing.Point(406, 42);
@@ -214,20 +216,20 @@ namespace Cotix.UI.WinForms.Products
             this.btnCancel.Text = "   CANCELAR";
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // llbChangePicture
+            // lblChangePicture
             // 
-            this.llbChangePicture.AutoSize = true;
-            this.llbChangePicture.Cursor = System.Windows.Forms.Cursors.Default;
-            this.llbChangePicture.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.llbChangePicture.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.llbChangePicture.Location = new System.Drawing.Point(91, 16);
-            this.llbChangePicture.Name = "llbChangePicture";
-            this.llbChangePicture.Size = new System.Drawing.Size(104, 17);
-            this.llbChangePicture.TabIndex = 14;
-            this.llbChangePicture.TabStop = true;
-            this.llbChangePicture.Text = "Cambiar Imagen";
-            this.llbChangePicture.Visible = false;
+            this.lblChangePicture.AutoSize = true;
+            this.lblChangePicture.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblChangePicture.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblChangePicture.ForeColor = System.Drawing.Color.Blue;
+            this.lblChangePicture.Location = new System.Drawing.Point(90, 339);
+            this.lblChangePicture.Name = "lblChangePicture";
+            this.lblChangePicture.Size = new System.Drawing.Size(95, 15);
+            this.lblChangePicture.TabIndex = 14;
+            this.lblChangePicture.Text = "Cambiar Imagen";
+            this.lblChangePicture.Visible = false;
             // 
             // frmProductDetails
             // 
@@ -235,7 +237,7 @@ namespace Cotix.UI.WinForms.Products
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(632, 389);
-            this.Controls.Add(this.llbChangePicture);
+            this.Controls.Add(this.lblChangePicture);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.chkDisable);
@@ -280,6 +282,6 @@ namespace Cotix.UI.WinForms.Products
         private System.Windows.Forms.CheckBox chkDisable;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.LinkLabel llbChangePicture;
+        private System.Windows.Forms.Label lblChangePicture;
     }
 }

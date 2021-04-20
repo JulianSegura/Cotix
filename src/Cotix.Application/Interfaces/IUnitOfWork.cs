@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Cotix.Application.Interfaces
 {
-    interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork : IDisposable
     {
         IRepository<User> UsersRepo { get; }
         IRepository<Product> ProductsRepo { get; }
