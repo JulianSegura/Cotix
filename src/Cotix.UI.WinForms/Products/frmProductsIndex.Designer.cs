@@ -1,7 +1,7 @@
 ﻿
-namespace Cotix.UI.WinForms
+namespace Cotix.UI.WinForms.Products
 {
-    partial class frmMain
+    partial class frmProductsIndex
     {
         /// <summary>
         /// Required designer variable.
@@ -29,27 +29,12 @@ namespace Cotix.UI.WinForms
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // frmMain
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
+            this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1064, 681);
-            this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.Black;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "frmMain";
-            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "COTIX";
-            this.ResumeLayout(false);
-
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Text = "frmProductsIndex";
         }
 
         #endregion
     }
 }
-

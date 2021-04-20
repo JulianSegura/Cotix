@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Cotix.UI.WinForms
+namespace Cotix.UI.WinForms.Products
 {
-    public partial class frmMain : Form
+    public partial class frmProductDetails : Form
     {
-        public frmMain()
+        public frmProductDetails()
         {
             InitializeComponent();
         }
