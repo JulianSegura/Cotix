@@ -19,12 +19,11 @@ namespace Cotix.UI.WinForms
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            BaseForm f1 = new BaseForm() {TopLevel=false,Dock=DockStyle.Fill};
-            panel1.Controls.Add(f1);
-            panel1.Tag = f1;//el tag se utiliza para exponer algun contenido que yo quiera hacia afuera de la aplicacion.
+            BaseForm f1 = new Products.frmProductsIndex() {TopLevel=false,Dock=DockStyle.Fill};
+            pnlBody.Controls.Add(f1);
+            pnlBody.Tag = f1;//el tag se utiliza para exponer algun contenido que yo quiera hacia afuera de la aplicacion.
+            f1.lblRunningForm.Text = (string)f1.Tag;
             f1.BringToFront();
-            //f1.btnBackToMainScreen.Visible = false;
-            //f1.lblBackToMainScreen.Visible = false;
             f1.Show();
             
         }

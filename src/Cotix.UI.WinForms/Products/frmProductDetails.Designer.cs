@@ -31,19 +31,20 @@ namespace Cotix.UI.WinForms.Products
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmProductDetails));
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtProductCode = new System.Windows.Forms.TextBox();
+            this.txtDescription = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtSpecification = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.txtCost = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.txtPrice = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.chkDisable = new System.Windows.Forms.CheckBox();
             this.pbProductPicture = new System.Windows.Forms.PictureBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.llbChangePicture = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pbProductPicture)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,24 +59,24 @@ namespace Cotix.UI.WinForms.Products
             this.label1.TabIndex = 1;
             this.label1.Text = "CODIGO";
             // 
-            // textBox1
+            // txtProductCode
             // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.textBox1.Location = new System.Drawing.Point(404, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(220, 27);
-            this.textBox1.TabIndex = 2;
+            this.txtProductCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtProductCode.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.txtProductCode.Location = new System.Drawing.Point(404, 12);
+            this.txtProductCode.Name = "txtProductCode";
+            this.txtProductCode.Size = new System.Drawing.Size(220, 27);
+            this.txtProductCode.TabIndex = 2;
             // 
-            // textBox2
+            // txtDescription
             // 
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox2.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.textBox2.Location = new System.Drawing.Point(403, 74);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(220, 100);
-            this.textBox2.TabIndex = 4;
+            this.txtDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtDescription.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.txtDescription.Location = new System.Drawing.Point(403, 74);
+            this.txtDescription.Multiline = true;
+            this.txtDescription.Name = "txtDescription";
+            this.txtDescription.Size = new System.Drawing.Size(220, 100);
+            this.txtDescription.TabIndex = 4;
             // 
             // label2
             // 
@@ -88,14 +89,14 @@ namespace Cotix.UI.WinForms.Products
             this.label2.TabIndex = 3;
             this.label2.Text = "DESCRIPCION";
             // 
-            // textBox3
+            // txtSpecification
             // 
-            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox3.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.textBox3.Location = new System.Drawing.Point(403, 187);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(220, 27);
-            this.textBox3.TabIndex = 6;
+            this.txtSpecification.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSpecification.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.txtSpecification.Location = new System.Drawing.Point(403, 187);
+            this.txtSpecification.Name = "txtSpecification";
+            this.txtSpecification.Size = new System.Drawing.Size(220, 27);
+            this.txtSpecification.TabIndex = 6;
             // 
             // label3
             // 
@@ -108,14 +109,14 @@ namespace Cotix.UI.WinForms.Products
             this.label3.TabIndex = 5;
             this.label3.Text = "ESPECIFICACION";
             // 
-            // textBox4
+            // txtCost
             // 
-            this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox4.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.textBox4.Location = new System.Drawing.Point(403, 227);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(131, 27);
-            this.textBox4.TabIndex = 8;
+            this.txtCost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtCost.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.txtCost.Location = new System.Drawing.Point(403, 227);
+            this.txtCost.Name = "txtCost";
+            this.txtCost.Size = new System.Drawing.Size(131, 27);
+            this.txtCost.TabIndex = 8;
             // 
             // label4
             // 
@@ -128,14 +129,14 @@ namespace Cotix.UI.WinForms.Products
             this.label4.TabIndex = 7;
             this.label4.Text = "COSTO";
             // 
-            // textBox5
+            // txtPrice
             // 
-            this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox5.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.textBox5.Location = new System.Drawing.Point(403, 267);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(131, 27);
-            this.textBox5.TabIndex = 10;
+            this.txtPrice.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPrice.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.txtPrice.Location = new System.Drawing.Point(403, 267);
+            this.txtPrice.Name = "txtPrice";
+            this.txtPrice.Size = new System.Drawing.Size(131, 27);
+            this.txtPrice.TabIndex = 10;
             // 
             // label5
             // 
@@ -144,31 +145,37 @@ namespace Cotix.UI.WinForms.Products
             this.label5.ForeColor = System.Drawing.Color.LightSlateGray;
             this.label5.Location = new System.Drawing.Point(275, 269);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(59, 20);
+            this.label5.Size = new System.Drawing.Size(110, 20);
             this.label5.TabIndex = 9;
-            this.label5.Text = "PRECIO";
+            this.label5.Text = "PRECIO VENTA";
             // 
-            // checkBox1
+            // chkDisable
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox1.ForeColor = System.Drawing.Color.LightSlateGray;
-            this.checkBox1.Location = new System.Drawing.Point(406, 42);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(81, 24);
-            this.checkBox1.TabIndex = 11;
-            this.checkBox1.Text = "Inactivar";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chkDisable.AutoSize = true;
+            this.chkDisable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkDisable.ForeColor = System.Drawing.Color.LightSlateGray;
+            this.chkDisable.Location = new System.Drawing.Point(406, 42);
+            this.chkDisable.Name = "chkDisable";
+            this.chkDisable.Size = new System.Drawing.Size(81, 24);
+            this.chkDisable.TabIndex = 11;
+            this.chkDisable.Text = "Inactivar";
+            this.chkDisable.UseVisualStyleBackColor = true;
             // 
             // pbProductPicture
             // 
+            this.pbProductPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pbProductPicture.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbProductPicture.ErrorImage = null;
+            this.pbProductPicture.Image = global::Cotix.UI.WinForms.Properties.Resources.Products;
+            this.pbProductPicture.InitialImage = null;
             this.pbProductPicture.Location = new System.Drawing.Point(13, 13);
             this.pbProductPicture.Name = "pbProductPicture";
             this.pbProductPicture.Size = new System.Drawing.Size(256, 344);
-            this.pbProductPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbProductPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pbProductPicture.TabIndex = 0;
             this.pbProductPicture.TabStop = false;
+            this.pbProductPicture.MouseEnter += new System.EventHandler(this.pbProductPicture_MouseEnter);
+            this.pbProductPicture.MouseLeave += new System.EventHandler(this.pbProductPicture_MouseLeave);
             // 
             // btnSave
             // 
@@ -208,24 +215,39 @@ namespace Cotix.UI.WinForms.Products
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = false;
             // 
+            // llbChangePicture
+            // 
+            this.llbChangePicture.AutoSize = true;
+            this.llbChangePicture.Cursor = System.Windows.Forms.Cursors.Default;
+            this.llbChangePicture.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.llbChangePicture.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.llbChangePicture.Location = new System.Drawing.Point(91, 16);
+            this.llbChangePicture.Name = "llbChangePicture";
+            this.llbChangePicture.Size = new System.Drawing.Size(104, 17);
+            this.llbChangePicture.TabIndex = 14;
+            this.llbChangePicture.TabStop = true;
+            this.llbChangePicture.Text = "Cambiar Imagen";
+            this.llbChangePicture.Visible = false;
+            // 
             // frmProductDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(632, 389);
+            this.Controls.Add(this.llbChangePicture);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.chkDisable);
+            this.Controls.Add(this.txtPrice);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.txtCost);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.txtSpecification);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtProductCode);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pbProductPicture);
             this.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -246,17 +268,18 @@ namespace Cotix.UI.WinForms.Products
 
         private System.Windows.Forms.PictureBox pbProductPicture;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtProductCode;
+        private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtSpecification;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox txtCost;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox chkDisable;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.LinkLabel llbChangePicture;
     }
 }

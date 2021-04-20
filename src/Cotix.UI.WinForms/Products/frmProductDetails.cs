@@ -16,5 +16,15 @@ namespace Cotix.UI.WinForms.Products
         {
             InitializeComponent();
         }
+
+        private void pbProductPicture_MouseEnter(object sender, EventArgs e)
+        {
+            llbChangePicture.Visible = true;
+        }
+
+        private void pbProductPicture_MouseLeave(object sender, EventArgs e)
+        {
+            llbChangePicture.Visible = false;
+        }
     }
 }

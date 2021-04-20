@@ -1,5 +1,4 @@
-﻿
-namespace Cotix.UI.WinForms
+﻿namespace Cotix.UI.WinForms
 {
     partial class BaseForm
     {
@@ -29,37 +28,30 @@ namespace Cotix.UI.WinForms
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblBackToMainScreen = new System.Windows.Forms.Label();
-            this.btnBackToMainScreen = new System.Windows.Forms.Button();
+            this.pnlMenu = new System.Windows.Forms.Panel();
+            this.lblRunningForm = new System.Windows.Forms.Label();
+            this.pnlMenu.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lblBackToMainScreen
+            // pnlMenu
             // 
-            this.lblBackToMainScreen.AutoSize = true;
-            this.lblBackToMainScreen.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblBackToMainScreen.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBackToMainScreen.ForeColor = System.Drawing.Color.CadetBlue;
-            this.lblBackToMainScreen.Location = new System.Drawing.Point(36, 10);
-            this.lblBackToMainScreen.Name = "lblBackToMainScreen";
-            this.lblBackToMainScreen.Size = new System.Drawing.Size(132, 21);
-            this.lblBackToMainScreen.TabIndex = 2;
-            this.lblBackToMainScreen.Text = "Pantalla Principal";
-            this.lblBackToMainScreen.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.pnlMenu.Controls.Add(this.lblRunningForm);
+            this.pnlMenu.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlMenu.Location = new System.Drawing.Point(0, 0);
+            this.pnlMenu.Name = "pnlMenu";
+            this.pnlMenu.Size = new System.Drawing.Size(1064, 43);
+            this.pnlMenu.TabIndex = 1;
             // 
-            // btnBackToMainScreen
+            // lblRunningForm
             // 
-            this.btnBackToMainScreen.BackColor = System.Drawing.Color.White;
-            this.btnBackToMainScreen.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnBackToMainScreen.FlatAppearance.BorderSize = 0;
-            this.btnBackToMainScreen.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnBackToMainScreen.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnBackToMainScreen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBackToMainScreen.Image = global::Cotix.UI.WinForms.Properties.Resources.left_arrow;
-            this.btnBackToMainScreen.Location = new System.Drawing.Point(0, 0);
-            this.btnBackToMainScreen.Name = "btnBackToMainScreen";
-            this.btnBackToMainScreen.Size = new System.Drawing.Size(39, 40);
-            this.btnBackToMainScreen.TabIndex = 1;
-            this.btnBackToMainScreen.UseVisualStyleBackColor = false;
+            this.lblRunningForm.AutoSize = true;
+            this.lblRunningForm.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRunningForm.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.lblRunningForm.Location = new System.Drawing.Point(12, 9);
+            this.lblRunningForm.Name = "lblRunningForm";
+            this.lblRunningForm.Size = new System.Drawing.Size(160, 25);
+            this.lblRunningForm.TabIndex = 2;
+            this.lblRunningForm.Text = "RUNNING FORM";
             // 
             // BaseForm
             // 
@@ -67,8 +59,7 @@ namespace Cotix.UI.WinForms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1064, 602);
-            this.Controls.Add(this.lblBackToMainScreen);
-            this.Controls.Add(this.btnBackToMainScreen);
+            this.Controls.Add(this.pnlMenu);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -76,13 +67,14 @@ namespace Cotix.UI.WinForms
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "COTIX";
+            this.pnlMenu.ResumeLayout(false);
+            this.pnlMenu.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-        public System.Windows.Forms.Button btnBackToMainScreen;
-        public System.Windows.Forms.Label lblBackToMainScreen;
+        protected internal System.Windows.Forms.Label lblRunningForm;
+        protected internal System.Windows.Forms.Panel pnlMenu;
     }
 }

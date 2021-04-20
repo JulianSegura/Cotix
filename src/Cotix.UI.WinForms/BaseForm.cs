@@ -16,10 +16,5 @@ namespace Cotix.UI.WinForms
         {
             InitializeComponent();
         }
-
-        private void lblBackToMainScreen_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
