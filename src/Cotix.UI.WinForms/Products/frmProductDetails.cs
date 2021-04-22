@@ -17,11 +17,14 @@ namespace Cotix.UI.WinForms.Products
 {
     public partial class frmProductDetails : Form
     {
+        //ToDo: Try saving this on the settings file so i can use it in other forms.
+        private readonly string _picturesFolder = Path.GetDirectoryName(Application.ExecutablePath) + @"\Images\";
         private readonly ProductsService _productService;
-        public frmProductDetails()
+
+        public frmProductDetails(ProductsService service=null)
         {
             InitializeComponent();
-            _productService = new ProductsService(new UnitOfWork());
+            _productService = service != null ? service : new ProductsService(new UnitOfWork());
         }
 
         private void pbProductPicture_MouseEnter(object sender, EventArgs e)
@@ -32,11 +35,9 @@ namespace Cotix.UI.WinForms.Products
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            //Check the Tag to verify if the form was opened with an update request.
             if (Tag != null)
             {
                 Close();
-                Dispose();
                 return;
             }
             CleanForm();
@@ -52,15 +53,13 @@ namespace Cotix.UI.WinForms.Products
             txtCost.Clear();
             txtPrice.Clear();
             chkDisable.Checked = true;
-            pbProductPicture.Image = null;
+            pbProductPicture.Image = Properties.Resources.Products;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (this.Tag == null) AddProduct();
             else UpdateProduct((Product)this.Tag);
-            //ToDo: Tener pendiente que el producto viene en el Tag desde el form principal
-            //ToDo: Inactivar el codigo de producto al actualizar (en el load)
         }
 
         private void AddProduct()
@@ -74,18 +73,20 @@ namespace Cotix.UI.WinForms.Products
                 Specification = txtSpecification.Text.Trim().ToUpper(),
                 Cost = txtCost.Text.Trim() != "" ? decimal.Parse(txtCost.Text.Trim()) : 0,
                 Price = txtPrice.Text.Trim() != "" ? decimal.Parse(txtPrice.Text.Trim()) : 0,
-                PicturePath = pbProductPicture.ImageLocation
+                PicturePath = pbProductPicture.ImageLocation != null ?  PictureDestinationFilePath() : string.Empty
             };
 
             var result = _productService.Add(product);
 
             if (result.IsSuccessful)
             {
-                //ToDo: Save product picture
-                MessageBox.Show("Producto Agregado Exitosamente");
+                if(pbProductPicture.ImageLocation!=null) SavePicture();
+                var another=MessageBox.Show("Producto Agregado Exitosamente\nDesea Agregar Otro Producto?","COTIX",buttons:MessageBoxButtons.YesNo);
+                Tag = true;
+                if (another != DialogResult.Yes) Close();
                 return;
             }
-            MessageBox.Show($"Error Al Agregar El Producto\nError: {result.ErrorMessage}");
+            MessageBox.Show($"Error Al Agregar El Producto\nError: {result.ErrorMessage}","COTIX");
         }
 
         private void UpdateProduct(Product product)
@@ -96,19 +97,26 @@ namespace Cotix.UI.WinForms.Products
             product.Specification = txtSpecification.Text.Trim();
             product.Cost = txtCost.Text.Trim() != "" ? decimal.Parse(txtCost.Text.Trim()) : 0;
             product.Price = txtPrice.Text.Trim() != "" ? decimal.Parse(txtPrice.Text.Trim()) : 0;
-            //ToDo: Compare if picture path changed
-            product.PicturePath = pbProductPicture.ImageLocation;
             product.Disabled = !chkDisable.Checked;
+            bool pictureChanged = false;
+            if (product.PicturePath != pbProductPicture.ImageLocation)
+            {
+                pictureChanged = true;
+                product.PicturePath = PictureDestinationFilePath();
+            }
+            
 
             var result = _productService.Update(product);
 
             if (result.IsSuccessful)
             {
-                //ToDo: Save product picture if changed
+                if (pictureChanged) SavePicture();
                 MessageBox.Show("Producto Actualizado Exitosamente");
+                Tag = true;
+                Close();
                 return;
             }
-            MessageBox.Show($"Error Al Actualizar El Producto\nError: {result.ErrorMessage}");
+            MessageBox.Show($"Error Al Actualizar El Producto\nError: {result.ErrorMessage}","COTIX");
         }
 
         private bool HandleKey(ref TextBox textbox, char keycode)
@@ -134,19 +142,19 @@ namespace Cotix.UI.WinForms.Products
         {
             if (txtProductCode.Text.Trim() == "")
             {
-                MessageBox.Show("El CODIGO DE PRODUCTO no puede estar vacio");
+                MessageBox.Show("El CODIGO DE PRODUCTO no puede estar vacio","COTIX");
                 return true;
             }
 
             if (txtDescription.Text.Trim() == "")
             {
-                MessageBox.Show("La DESCRIPCION no puede estar vacia");
+                MessageBox.Show("La DESCRIPCION no puede estar vacia", "COTIX");
                 return true;
             }
 
             if (txtPrice.Text.Trim() == "")
             {
-                MessageBox.Show("El PRECIO DE PRODUCTO no puede estar vacio");
+                MessageBox.Show("El PRECIO DE PRODUCTO no puede estar vacio", "COTIX");
                 return true;
             }
 
@@ -190,30 +198,43 @@ namespace Cotix.UI.WinForms.Products
 
         private void SavePicture()
         {
-            //string appPath = Path.GetDirectoryName(Application.ExecutablePath) + @"\Images\"; 
-            //if (Directory.Exists(appPath) == false)                                              
-            //{                                                                                    
-            //    Directory.CreateDirectory(appPath);                                              
-            //}                                                                                    
+            if (File.Exists(PictureDestinationFilePath())) return;
 
-            //if (opFile.ShowDialog() == DialogResult.OK)
-            //{
-            //    try
-            //    {
-            //        string iName = opFile.SafeFileName;   // <---
-            //        string filepath = opFile.FileName;    // <---
-            //        File.Copy(filepath, appPath + iName); // <---
-            //        picProduct.Image = new Bitmap(opFile.OpenFile());
-            //    }
-            //    catch (Exception exp)
-            //    {
-            //        MessageBox.Show("Unable to open file " + exp.Message);
-            //    }
-            //}
-            //else
-            //{
-            //    opFile.Dispose();
-            //}
+            if (Directory.Exists(_picturesFolder) == false)
+            {
+                Directory.CreateDirectory(_picturesFolder);
+            }
+
+            File.Copy(pbProductPicture.ImageLocation, PictureDestinationFilePath());
+        }
+
+        private string PictureDestinationFilePath()
+        {
+            var fileToCopy = pbProductPicture.ImageLocation;
+            return _picturesFolder + Path.GetFileName(fileToCopy);
+        }
+
+        private void frmProductDetails_Load(object sender, EventArgs e)
+        {
+            if (Tag == null) return;
+
+            txtProductCode.Enabled = false;
+
+            var product = (Product)Tag;
+
+            Fill(product);
+        }
+
+        private void Fill(Product product)
+        {
+            //ToDo: Format cost & Price to Money representation.
+            txtProductCode.Text = product.Code;
+            chkDisable.Checked = !product.Disabled;//Check this out, why is it not changing the checkbox color?
+            txtDescription.Text = product.Description;
+            txtSpecification.Text = product.Specification;
+            txtCost.Text = product.Cost.ToString();
+            txtPrice.Text = product.Price.ToString();
+            pbProductPicture.ImageLocation = product.PicturePath;
         }
     }
 }

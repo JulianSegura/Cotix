@@ -8,7 +8,6 @@ frmMain
 Size: 1080, 720
 
 
-frmProductsDetails
 
 default connection string for creating .mdf file
 {
@@ -16,3 +15,13 @@ default connection string for creating .mdf file
     "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=EmployeeDB;AttachDbFileName=%CONTENTROOTPATH%\\AppData\\EmployeeDB.mdf;Trusted_Connection=True;MultipleActiveResultSets=true"
   }
 }
+
+
+test de conexion a BD
+string connectionString = "Data Source=.\\SQLEXPRESS;AttachDbFilename={0}\\Seminar Library CSE KU\\bookdb.mdf;Integrated Security=True;Connect Timeout=30;User Instance=True";
+
+#if DEBUG
+    connectionString = string.Format(connectionString, "E:\\Software\\Projects\\Visual Studio project\\");
+#else
+    connectionString = string.Format(connectionString, Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
+#endif

@@ -170,13 +170,14 @@ namespace Cotix.UI.WinForms.Products
             // 
             this.pbProductPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pbProductPicture.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbProductPicture.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbProductPicture.ErrorImage = null;
             this.pbProductPicture.Image = global::Cotix.UI.WinForms.Properties.Resources.Products;
             this.pbProductPicture.InitialImage = null;
             this.pbProductPicture.Location = new System.Drawing.Point(13, 13);
             this.pbProductPicture.Name = "pbProductPicture";
             this.pbProductPicture.Size = new System.Drawing.Size(256, 344);
-            this.pbProductPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbProductPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbProductPicture.TabIndex = 0;
             this.pbProductPicture.TabStop = false;
             this.pbProductPicture.DoubleClick += new System.EventHandler(this.pbProductPicture_DoubleClick);
@@ -250,6 +251,7 @@ namespace Cotix.UI.WinForms.Products
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Detalle Producto";
+            this.Load += new System.EventHandler(this.frmProductDetails_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbProductPicture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -189,6 +189,12 @@
     <Compile Include="Products\frmProductsIndex.Designer.cs">
       <DependentUpon>frmProductsIndex.cs</DependentUpon>
     </Compile>
+    <Compile Include="Products\frmPictureViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Products\frmPictureViewer.Designer.cs">
+      <DependentUpon>frmPictureViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="BaseForm.resx">
@@ -202,6 +208,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Products\frmProductsIndex.resx">
       <DependentUpon>frmProductsIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Products\frmPictureViewer.resx">
+      <DependentUpon>frmPictureViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
