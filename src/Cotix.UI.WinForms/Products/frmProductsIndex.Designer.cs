@@ -30,6 +30,7 @@ namespace Cotix.UI.WinForms.Products
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvDetails = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProductCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,11 +63,13 @@ namespace Cotix.UI.WinForms.Products
             // 
             this.btnDelete.FlatAppearance.BorderSize = 0;
             this.btnDelete.Location = new System.Drawing.Point(206, 26);
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnEdit
             // 
             this.btnEdit.FlatAppearance.BorderSize = 0;
             this.btnEdit.Location = new System.Drawing.Point(170, 26);
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnNew
             // 
@@ -83,15 +86,16 @@ namespace Cotix.UI.WinForms.Products
             this.dgvDetails.AllowUserToAddRows = false;
             this.dgvDetails.AllowUserToDeleteRows = false;
             this.dgvDetails.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgvDetails.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvDetails.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.dgvDetails.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvDetails.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvDetails.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -107,13 +111,24 @@ namespace Cotix.UI.WinForms.Products
             this.dgvDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDetails.EnableHeadersVisualStyles = false;
             this.dgvDetails.Location = new System.Drawing.Point(0, 59);
+            this.dgvDetails.MultiSelect = false;
             this.dgvDetails.Name = "dgvDetails";
             this.dgvDetails.ReadOnly = true;
-            this.dgvDetails.RowHeadersVisible = false;
+            this.dgvDetails.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDetails.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDetails.RowHeadersWidth = 15;
+            this.dgvDetails.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvDetails.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDetails.Size = new System.Drawing.Size(1064, 543);
             this.dgvDetails.TabIndex = 2;
+            this.dgvDetails.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetails_CellDoubleClick);
             // 
             // Id
             // 
@@ -127,28 +142,28 @@ namespace Cotix.UI.WinForms.Products
             this.ProductCode.HeaderText = "Codigo";
             this.ProductCode.Name = "ProductCode";
             this.ProductCode.ReadOnly = true;
-            this.ProductCode.Width = 82;
+            this.ProductCode.Width = 84;
             // 
             // Specification
             // 
             this.Specification.HeaderText = "Especificacion";
             this.Specification.Name = "Specification";
             this.Specification.ReadOnly = true;
-            this.Specification.Width = 128;
+            this.Specification.Width = 130;
             // 
             // Description
             // 
             this.Description.HeaderText = "Descripcion";
             this.Description.Name = "Description";
             this.Description.ReadOnly = true;
-            this.Description.Width = 113;
+            this.Description.Width = 115;
             // 
             // Price
             // 
             this.Price.HeaderText = "Precio";
             this.Price.Name = "Price";
             this.Price.ReadOnly = true;
-            this.Price.Width = 76;
+            this.Price.Width = 77;
             // 
             // PicturePath
             // 
@@ -162,14 +177,14 @@ namespace Cotix.UI.WinForms.Products
             this.Picture.HeaderText = "Foto";
             this.Picture.Name = "Picture";
             this.Picture.ReadOnly = true;
-            this.Picture.Width = 45;
+            this.Picture.Width = 46;
             // 
             // Disabled
             // 
             this.Disabled.HeaderText = "Activo";
             this.Disabled.Name = "Disabled";
             this.Disabled.ReadOnly = true;
-            this.Disabled.Width = 57;
+            this.Disabled.Width = 58;
             // 
             // frmProductsIndex
             // 

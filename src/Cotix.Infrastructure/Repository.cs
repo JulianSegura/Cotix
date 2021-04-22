@@ -1,4 +1,5 @@
-﻿using Cotix.AppLayer.Interfaces;
+﻿using Cotix.AppLayer;
+using Cotix.AppLayer.Interfaces;
 using Cotix.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,7 +13,7 @@ namespace Cotix.Infrastructure
     {
 
         private readonly DbSet<T> _dbSet;
-        private static DateTime currentTime = DateTime.UtcNow;
+        private static DateTime currentTime = DateTime.Now;
 
         public Repository(DbContext context)
         {
@@ -47,7 +48,7 @@ namespace Cotix.Infrastructure
             if (entity is AuditableEntity e)
             {
                 e.CreatedAt = currentTime;
-                //ToDo: Register userId for auditable entities
+                e.CreatedBy = LoggedUser.Id;
             }
 
             _dbSet.Add(entity);
@@ -60,7 +61,7 @@ namespace Cotix.Infrastructure
                 if (entity is AuditableEntity e)
                 {
                     e.CreatedAt= currentTime;
-                    //Todo: Register UserIf for auditable entities
+                    e.CreatedBy = LoggedUser.Id;
                 }
             }
         }
@@ -69,8 +70,8 @@ namespace Cotix.Infrastructure
         {
             if (entity is AuditableEntity e)
             {
-                e.CreatedAt = currentTime;
-                //ToDo: Register userId for auditable entities
+                e.LastUpdatedAt = currentTime;
+                e.LastUpdatedBy = LoggedUser.Id;
             }
         }
 
@@ -80,8 +81,8 @@ namespace Cotix.Infrastructure
             {
                 if (entity is AuditableEntity e)
                 {
-                    e.CreatedAt = currentTime;
-                    //Todo: Register UserIf for auditable entities
+                    e.LastUpdatedAt = currentTime;
+                    e.LastUpdatedBy = LoggedUser.Id;
                 }
             }
         }
