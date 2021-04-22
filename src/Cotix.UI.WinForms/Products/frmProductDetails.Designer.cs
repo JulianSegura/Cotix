@@ -197,6 +197,7 @@ namespace Cotix.UI.WinForms.Products
             this.btnSave.Text = "   GUARDAR";
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnCancel
             // 

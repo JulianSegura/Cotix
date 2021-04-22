@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Cotix.Application.Interfaces
+namespace Cotix.AppLayer.Interfaces
 {
     public interface IRepository<T> where T : BaseEntity
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cotix.Application.Interfaces
+namespace Cotix.AppLayer.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {

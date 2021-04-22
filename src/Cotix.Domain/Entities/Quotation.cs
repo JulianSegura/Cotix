@@ -14,6 +14,7 @@ namespace Cotix.Domain.Entities
 
         #region Navigation
         public virtual ICollection<QuotationDetail> Details { get; private set; }
+        public virtual Customer Customer { get; set; }
         #endregion
     }
 }
