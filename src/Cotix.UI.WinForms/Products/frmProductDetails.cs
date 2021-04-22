@@ -68,12 +68,14 @@ namespace Cotix.UI.WinForms.Products
                 Price = decimal.Parse(txtCost.Text.Trim())
             };
 
-            if (_productService.Add(product).Id > 0)
+            var result = _productService.Add(product);
+
+            if (result.IsSuccessful)
             {
                 MessageBox.Show("Producto Agregado Exitosamente");
                 return;
             }
-            MessageBox.Show("Error Al Agregar El Producto");
+            MessageBox.Show($"Error Al Agregar El Producto\nError: {result.ErrorMessage}");
         }
 
         //ToDo: Tener pendiente que el producto viene en el Tag desde el form principal
