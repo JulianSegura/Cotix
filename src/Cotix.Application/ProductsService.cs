@@ -65,22 +65,26 @@ namespace Cotix.AppLayer
             {
                 response.SetException(e);
             }
+
             return response;
         }
 
-        public Product Update(Product product)
+        public ResultResponse<Product> Update(Product product)
         {
+            var response = new ResultResponse<Product>();
             try
             {
                 _productsRepo.Update(product);
                 _uow.Complete();
+                response.IsSuccessful = true;
+                response.ResultObject = product;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                response.SetException(e);
             }
 
-            return product;
+            return response;
         }
 
         public bool Delete(int id)
