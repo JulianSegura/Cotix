@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Cotix.AppLayer.Interfaces;
+using Cotix.Domain.Common;
 using Cotix.Domain.Entities;
 
 namespace Cotix.AppLayer
@@ -50,19 +51,21 @@ namespace Cotix.AppLayer
             return lst;
         }
 
-        public Product Add(Product product)
+        public ResultResponse<Product> Add(Product product)
         {
+            var response = new ResultResponse<Product>();
             try
             {
                 _productsRepo.Add(product);
                 _uow.Complete();
+                response.IsSuccessful = true;
+                response.ResultObject = product;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                response.SetException(e);
             }
-
-            return product;
+            return response;
         }
 
         public Product Update(Product product)
