@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Cotix.Application.Interfaces;
+using Cotix.AppLayer.Interfaces;
 using Cotix.Domain.Entities;
 
-namespace Cotix.Application
+namespace Cotix.AppLayer
 {
     public class ProductsService
     {
@@ -50,7 +50,7 @@ namespace Cotix.Application
             return lst;
         }
 
-        public void Add(Product product)
+        public Product Add(Product product)
         {
             try
             {
@@ -62,9 +62,10 @@ namespace Cotix.Application
                 throw;
             }
 
+            return product;
         }
 
-        public void Update(Product product)
+        public Product Update(Product product)
         {
             try
             {
@@ -75,18 +76,21 @@ namespace Cotix.Application
             {
                 throw;
             }
+
+            return product;
         }
 
-        public void Delete(int id)
+        public bool Delete(int id)
         {
             try
             {
                 _productsRepo.Delete(id);
                 _uow.Complete();
+                return true;
             }
             catch (Exception)
             {
-                throw;
+                return false;
             }
         }
     }

@@ -10,3 +10,9 @@ Size: 1080, 720
 
 frmProductsDetails
 
+default connection string for creating .mdf file
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=EmployeeDB;AttachDbFileName=%CONTENTROOTPATH%\\AppData\\EmployeeDB.mdf;Trusted_Connection=True;MultipleActiveResultSets=true"
+  }
+}

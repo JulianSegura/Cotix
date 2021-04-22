@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Entities\BaseEntities.cs" />
     <Compile Include="Entities\Customer.cs" />
+    <Compile Include="Entities\Enums.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\QuotationDetail.cs" />
     <Compile Include="Entities\Quotation.cs" />
