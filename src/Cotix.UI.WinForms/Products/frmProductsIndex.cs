@@ -58,6 +58,12 @@ namespace Cotix.UI.WinForms.Products
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
+            if (dgvDetails.SelectedRows.Count < 1)
+            {
+                MessageBox.Show("Seleccionar Un Producto Para Editar", "COTIX");
+                return;
+            }
+
             using (frmProductDetails f= new frmProductDetails(_productService))
             {
                 f.Tag = _productService.GetById((int)dgvDetails.SelectedRows[0].Cells["Id"].Value);

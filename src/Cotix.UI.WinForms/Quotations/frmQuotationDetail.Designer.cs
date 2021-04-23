@@ -69,7 +69,7 @@ namespace Cotix.UI.WinForms.Quotations
             this.label14 = new System.Windows.Forms.Label();
             this.lblValidTime = new System.Windows.Forms.Label();
             this.lblQuotationNumber = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
+            this.lblQuotationNumberLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuotationDetails)).BeginInit();
@@ -487,16 +487,16 @@ namespace Cotix.UI.WinForms.Quotations
             this.lblQuotationNumber.TabIndex = 26;
             this.lblQuotationNumber.Text = "#Cotizacion";
             // 
-            // label16
+            // lblQuotationNumberLabel
             // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.label16.Location = new System.Drawing.Point(687, 21);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(45, 18);
-            this.label16.TabIndex = 28;
-            this.label16.Text = "No : ";
+            this.lblQuotationNumberLabel.AutoSize = true;
+            this.lblQuotationNumberLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblQuotationNumberLabel.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.lblQuotationNumberLabel.Location = new System.Drawing.Point(687, 21);
+            this.lblQuotationNumberLabel.Name = "lblQuotationNumberLabel";
+            this.lblQuotationNumberLabel.Size = new System.Drawing.Size(45, 18);
+            this.lblQuotationNumberLabel.TabIndex = 28;
+            this.lblQuotationNumberLabel.Text = "No : ";
             // 
             // frmQuotationDetail
             // 
@@ -504,7 +504,7 @@ namespace Cotix.UI.WinForms.Quotations
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1077, 547);
-            this.Controls.Add(this.label16);
+            this.Controls.Add(this.lblQuotationNumberLabel);
             this.Controls.Add(this.lblQuotationNumber);
             this.Controls.Add(this.lblValidTime);
             this.Controls.Add(this.label14);
@@ -530,7 +530,7 @@ namespace Cotix.UI.WinForms.Quotations
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Detalle Cotizacion";
+            this.Text = "Detalles Cotizacion";
             this.Load += new System.EventHandler(this.frmQuotationDetail_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -582,6 +582,6 @@ namespace Cotix.UI.WinForms.Quotations
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label lblValidTime;
         private System.Windows.Forms.Label lblQuotationNumber;
-        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label lblQuotationNumberLabel;
     }
 }

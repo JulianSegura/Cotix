@@ -13,6 +13,8 @@ namespace Cotix.UI.WinForms.Quotations
     public partial class frmQuotationDetail : Form
     {
         //ToDo: Add a clear/cancel button
+        //TODo: Add ToolTips to the buttons
+        //ToDo: If the call action is to add, Quotation ID must be invisible.
         public frmQuotationDetail()
         {
             InitializeComponent();

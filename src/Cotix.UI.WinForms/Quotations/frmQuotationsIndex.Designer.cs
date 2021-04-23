@@ -55,6 +55,7 @@ namespace Cotix.UI.WinForms.Quotations
             // 
             this.btnNew.FlatAppearance.BorderSize = 0;
             this.btnNew.Location = new System.Drawing.Point(157, 26);
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // txtSearch
             // 

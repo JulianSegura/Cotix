@@ -16,7 +16,7 @@ namespace Cotix.UI.WinForms
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Quotations.frmQuotationDetail());
+            Application.Run(new frmMain());
         }
     }
 }
