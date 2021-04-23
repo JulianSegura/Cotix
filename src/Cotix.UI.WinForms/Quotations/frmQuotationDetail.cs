@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Cotix.AppLayer;
+using Cotix.Domain.Entities;
+using Cotix.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,9 +18,13 @@ namespace Cotix.UI.WinForms.Quotations
         //ToDo: Add a clear/cancel button
         //TODo: Add ToolTips to the buttons
         //ToDo: If the call action is to add, Quotation ID must be invisible.
+
+        private readonly ProductsService _productService;
+
         public frmQuotationDetail()
         {
             InitializeComponent();
+            _productService = new ProductsService(new UnitOfWork());
         }
 
         private void chkAddTransportation_CheckedChanged(object sender, EventArgs e)
@@ -43,6 +50,65 @@ namespace Cotix.UI.WinForms.Quotations
         private void frmQuotationDetail_Load(object sender, EventArgs e)
         {
             dtpValidUntil.MinDate = DateTime.Today;
+            FillProductsDatagrid(_productService.GetAll().Where(p=>p.Disabled==false).ToList());
+        }
+
+        private void FillProductsDatagrid(ICollection<Product> products)
+        {
+            dgvProducts.Rows.Clear();
+            var picture = new Bitmap(64,64);
+            foreach (var product in products)
+            {
+                DataGridViewRow row = new DataGridViewRow();
+                row.CreateCells(dgvProducts);
+                picture = product.PicturePath != "" ? new Bitmap(new Bitmap(product.PicturePath), 64, 64) : new Bitmap(Properties.Resources.boxes, 64, 64);
+                row.SetValues(product.Id, product.Code, product.Specification, picture, $"{product.Price:C}",1,"Agregar");
+                dgvProducts.Rows.Add(row);
+            }
+
+            dgvProducts.ClearSelection();
+        }
+
+        private void dgvProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!DataGridButtonClicked(sender, e)) return;
+            
+            int productId = (int)dgvProducts.Rows[e.RowIndex].Cells["Id"].Value;
+            var product = _productService.GetById(productId);
+            var qty = int.Parse(dgvProducts.Rows[e.RowIndex].Cells["Qty"].Value.ToString());
+               
+            AddItemToQuotation(product,qty);
+
+            dgvProducts.Rows[e.RowIndex].Cells["Qty"].Value = 1;
+            
+        }
+
+        private bool DataGridButtonClicked(object sender, DataGridViewCellEventArgs e)
+        {
+            var sendergrid = (DataGridView)sender;
+
+            if (sendergrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0) return true;
+            return false;
+        }
+
+        private void AddItemToQuotation(Product product, int quantity)
+        {
+            var picture = new Bitmap(64, 64);
+            DataGridViewRow row = new DataGridViewRow();
+            row.CreateCells(dgvQuotationDetails);
+
+            picture = product.PicturePath != "" ? new Bitmap(new Bitmap(product.PicturePath), 64, 64) : new Bitmap(Properties.Resources.boxes, 64, 64);
+            row.SetValues(product.Id, product.Code, product.Description, picture,quantity, $"{product.Price:C}",$"{product.Price*quantity:c}", "X");
+            dgvQuotationDetails.Rows.Add(row);
+
+            dgvQuotationDetails.Rows[dgvQuotationDetails.Rows.Count-1].Selected = true;
+        }
+
+        private void dgvQuotationDetails_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!DataGridButtonClicked(sender, e)) return;
+
+            dgvQuotationDetails.Rows.RemoveAt(e.RowIndex);
         }
     }
 }

@@ -29,7 +29,20 @@ namespace Cotix.UI.WinForms.Quotations
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmQuotationDetail));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblCustomerNotAdded = new System.Windows.Forms.Label();
             this.btnAddCustomer = new System.Windows.Forms.Button();
@@ -44,12 +57,6 @@ namespace Cotix.UI.WinForms.Quotations
             this.chkAddTransportation = new System.Windows.Forms.CheckBox();
             this.txtTransportationCost = new System.Windows.Forms.TextBox();
             this.dgvProducts = new System.Windows.Forms.DataGridView();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProductCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Specification = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Picture = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Add = new System.Windows.Forms.DataGridViewButtonColumn();
             this.dgvQuotationDetails = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -70,6 +77,22 @@ namespace Cotix.UI.WinForms.Quotations
             this.lblValidTime = new System.Windows.Forms.Label();
             this.lblQuotationNumber = new System.Windows.Forms.Label();
             this.lblQuotationNumberLabel = new System.Windows.Forms.Label();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Specification = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Picture = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Add = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.ProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QuotationProductCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QuotationPicture = new System.Windows.Forms.DataGridViewImageColumn();
+            this.QuotationQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QuotationPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PriceTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DeleteButton = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuotationDetails)).BeginInit();
@@ -219,71 +242,108 @@ namespace Cotix.UI.WinForms.Quotations
             // 
             // dgvProducts
             // 
-            this.dgvProducts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgvProducts.AllowUserToAddRows = false;
+            this.dgvProducts.AllowUserToDeleteRows = false;
+            this.dgvProducts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvProducts.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.dgvProducts.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvProducts.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProducts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
             this.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProducts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
             this.ProductCode,
             this.Specification,
-            this.Price,
             this.Picture,
+            this.Price,
+            this.Qty,
             this.Add});
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.CadetBlue;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProducts.DefaultCellStyle = dataGridViewCellStyle18;
             this.dgvProducts.EnableHeadersVisualStyles = false;
             this.dgvProducts.Location = new System.Drawing.Point(12, 252);
+            this.dgvProducts.MultiSelect = false;
             this.dgvProducts.Name = "dgvProducts";
+            this.dgvProducts.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProducts.RowHeadersDefaultCellStyle = dataGridViewCellStyle19;
+            this.dgvProducts.RowHeadersVisible = false;
+            this.dgvProducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvProducts.Size = new System.Drawing.Size(442, 280);
             this.dgvProducts.TabIndex = 1;
-            // 
-            // Id
-            // 
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            this.Id.Visible = false;
-            // 
-            // ProductCode
-            // 
-            this.ProductCode.HeaderText = "Codigo";
-            this.ProductCode.Name = "ProductCode";
-            this.ProductCode.ReadOnly = true;
-            this.ProductCode.Width = 64;
-            // 
-            // Specification
-            // 
-            this.Specification.HeaderText = "Especificacion";
-            this.Specification.Name = "Specification";
-            this.Specification.ReadOnly = true;
-            // 
-            // Price
-            // 
-            this.Price.HeaderText = "Precio";
-            this.Price.Name = "Price";
-            this.Price.ReadOnly = true;
-            this.Price.Width = 61;
-            // 
-            // Picture
-            // 
-            this.Picture.HeaderText = "Foto";
-            this.Picture.Name = "Picture";
-            this.Picture.ReadOnly = true;
-            this.Picture.Width = 33;
-            // 
-            // Add
-            // 
-            this.Add.HeaderText = "Agregar";
-            this.Add.Name = "Add";
-            this.Add.ReadOnly = true;
-            this.Add.Width = 49;
+            this.dgvProducts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellContentClick);
             // 
             // dgvQuotationDetails
             // 
+            this.dgvQuotationDetails.AllowUserToAddRows = false;
+            this.dgvQuotationDetails.AllowUserToDeleteRows = false;
+            this.dgvQuotationDetails.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgvQuotationDetails.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.dgvQuotationDetails.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dgvQuotationDetails.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle20.BackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle20.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvQuotationDetails.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle20;
             this.dgvQuotationDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvQuotationDetails.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ProductId,
+            this.QuotationProductCode,
+            this.Description,
+            this.QuotationPicture,
+            this.QuotationQty,
+            this.QuotationPrice,
+            this.PriceTotal,
+            this.DeleteButton});
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle25.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle25.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.Color.CadetBlue;
+            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvQuotationDetails.DefaultCellStyle = dataGridViewCellStyle25;
+            this.dgvQuotationDetails.EnableHeadersVisualStyles = false;
             this.dgvQuotationDetails.Location = new System.Drawing.Point(460, 45);
+            this.dgvQuotationDetails.MultiSelect = false;
             this.dgvQuotationDetails.Name = "dgvQuotationDetails";
+            this.dgvQuotationDetails.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle26.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle26.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle26.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvQuotationDetails.RowHeadersDefaultCellStyle = dataGridViewCellStyle26;
+            this.dgvQuotationDetails.RowHeadersVisible = false;
+            this.dgvQuotationDetails.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvQuotationDetails.Size = new System.Drawing.Size(605, 387);
             this.dgvQuotationDetails.TabIndex = 2;
+            this.dgvQuotationDetails.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQuotationDetails_CellContentClick);
             // 
             // label3
             // 
@@ -335,9 +395,9 @@ namespace Cotix.UI.WinForms.Quotations
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(918, 438);
+            this.btnSave.Location = new System.Drawing.Point(884, 438);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(101, 97);
+            this.btnSave.Size = new System.Drawing.Size(83, 46);
             this.btnSave.TabIndex = 11;
             this.btnSave.Text = "Guardar";
             this.btnSave.UseVisualStyleBackColor = false;
@@ -351,7 +411,7 @@ namespace Cotix.UI.WinForms.Quotations
             this.btnExportPDF.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExportPDF.ForeColor = System.Drawing.Color.White;
             this.btnExportPDF.Image = ((System.Drawing.Image)(resources.GetObject("btnExportPDF.Image")));
-            this.btnExportPDF.Location = new System.Drawing.Point(1025, 438);
+            this.btnExportPDF.Location = new System.Drawing.Point(886, 491);
             this.btnExportPDF.Name = "btnExportPDF";
             this.btnExportPDF.Size = new System.Drawing.Size(40, 46);
             this.btnExportPDF.TabIndex = 12;
@@ -366,7 +426,7 @@ namespace Cotix.UI.WinForms.Quotations
             this.btnExportExcel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExportExcel.ForeColor = System.Drawing.Color.White;
             this.btnExportExcel.Image = ((System.Drawing.Image)(resources.GetObject("btnExportExcel.Image")));
-            this.btnExportExcel.Location = new System.Drawing.Point(1025, 489);
+            this.btnExportExcel.Location = new System.Drawing.Point(929, 491);
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.Size = new System.Drawing.Size(40, 46);
             this.btnExportExcel.TabIndex = 13;
@@ -498,12 +558,157 @@ namespace Cotix.UI.WinForms.Quotations
             this.lblQuotationNumberLabel.TabIndex = 28;
             this.lblQuotationNumberLabel.Text = "No : ";
             // 
+            // btnCancel
+            // 
+            this.btnCancel.BackColor = System.Drawing.Color.Crimson;
+            this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCancel.FlatAppearance.BorderSize = 0;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.ForeColor = System.Drawing.Color.White;
+            this.btnCancel.Location = new System.Drawing.Point(973, 439);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(92, 46);
+            this.btnCancel.TabIndex = 29;
+            this.btnCancel.Text = "Cancelar";
+            this.btnCancel.UseVisualStyleBackColor = false;
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Visible = false;
+            this.Id.Width = 23;
+            // 
+            // ProductCode
+            // 
+            this.ProductCode.HeaderText = "Codigo";
+            this.ProductCode.Name = "ProductCode";
+            this.ProductCode.ReadOnly = true;
+            this.ProductCode.Width = 70;
+            // 
+            // Specification
+            // 
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Specification.DefaultCellStyle = dataGridViewCellStyle15;
+            this.Specification.HeaderText = "Especificacion";
+            this.Specification.Name = "Specification";
+            this.Specification.ReadOnly = true;
+            this.Specification.Width = 114;
+            // 
+            // Picture
+            // 
+            this.Picture.HeaderText = "Foto";
+            this.Picture.Name = "Picture";
+            this.Picture.ReadOnly = true;
+            this.Picture.Width = 37;
+            // 
+            // Price
+            // 
+            this.Price.HeaderText = "Precio";
+            this.Price.Name = "Price";
+            this.Price.ReadOnly = true;
+            this.Price.Width = 67;
+            // 
+            // Qty
+            // 
+            this.Qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Qty.DefaultCellStyle = dataGridViewCellStyle16;
+            this.Qty.HeaderText = "Cantidad";
+            this.Qty.Name = "Qty";
+            this.Qty.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Qty.Width = 60;
+            // 
+            // Add
+            // 
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle17.BackColor = System.Drawing.Color.MediumSeaGreen;
+            dataGridViewCellStyle17.ForeColor = System.Drawing.Color.White;
+            this.Add.DefaultCellStyle = dataGridViewCellStyle17;
+            this.Add.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Add.HeaderText = "";
+            this.Add.Name = "Add";
+            this.Add.ReadOnly = true;
+            this.Add.Text = "";
+            this.Add.ToolTipText = "Agregar A Cotizacion";
+            this.Add.Width = 5;
+            // 
+            // ProductId
+            // 
+            this.ProductId.HeaderText = "ProductId";
+            this.ProductId.Name = "ProductId";
+            this.ProductId.ReadOnly = true;
+            this.ProductId.Visible = false;
+            this.ProductId.Width = 67;
+            // 
+            // QuotationProductCode
+            // 
+            this.QuotationProductCode.HeaderText = "Codigo Producto";
+            this.QuotationProductCode.Name = "QuotationProductCode";
+            this.QuotationProductCode.ReadOnly = true;
+            this.QuotationProductCode.Width = 114;
+            // 
+            // Description
+            // 
+            this.Description.HeaderText = "Descripcion";
+            this.Description.Name = "Description";
+            this.Description.ReadOnly = true;
+            this.Description.Width = 98;
+            // 
+            // QuotationPicture
+            // 
+            this.QuotationPicture.HeaderText = "Foto";
+            this.QuotationPicture.Name = "QuotationPicture";
+            this.QuotationPicture.ReadOnly = true;
+            this.QuotationPicture.Width = 37;
+            // 
+            // QuotationQty
+            // 
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.QuotationQty.DefaultCellStyle = dataGridViewCellStyle21;
+            this.QuotationQty.HeaderText = "Cantidad";
+            this.QuotationQty.Name = "QuotationQty";
+            this.QuotationQty.Width = 81;
+            // 
+            // QuotationPrice
+            // 
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.QuotationPrice.DefaultCellStyle = dataGridViewCellStyle22;
+            this.QuotationPrice.HeaderText = "Precio Unitatio";
+            this.QuotationPrice.Name = "QuotationPrice";
+            this.QuotationPrice.ReadOnly = true;
+            this.QuotationPrice.Width = 105;
+            // 
+            // PriceTotal
+            // 
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.PriceTotal.DefaultCellStyle = dataGridViewCellStyle23;
+            this.PriceTotal.HeaderText = "Total";
+            this.PriceTotal.Name = "PriceTotal";
+            this.PriceTotal.ReadOnly = true;
+            this.PriceTotal.Width = 60;
+            // 
+            // DeleteButton
+            // 
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle24.ForeColor = System.Drawing.Color.White;
+            this.DeleteButton.DefaultCellStyle = dataGridViewCellStyle24;
+            this.DeleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DeleteButton.HeaderText = "";
+            this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.ReadOnly = true;
+            this.DeleteButton.Width = 5;
+            // 
             // frmQuotationDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1077, 547);
+            this.ClientSize = new System.Drawing.Size(1077, 577);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lblQuotationNumberLabel);
             this.Controls.Add(this.lblQuotationNumber);
             this.Controls.Add(this.lblValidTime);
@@ -569,12 +774,6 @@ namespace Cotix.UI.WinForms.Quotations
         private System.Windows.Forms.TextBox txtCustomerEmail;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label lblCustomerNotAdded;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProductCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Specification;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
-        private System.Windows.Forms.DataGridViewImageColumn Picture;
-        private System.Windows.Forms.DataGridViewButtonColumn Add;
         private System.Windows.Forms.ComboBox cmbCustomerName;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
@@ -583,5 +782,21 @@ namespace Cotix.UI.WinForms.Quotations
         private System.Windows.Forms.Label lblValidTime;
         private System.Windows.Forms.Label lblQuotationNumber;
         private System.Windows.Forms.Label lblQuotationNumberLabel;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProductCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Specification;
+        private System.Windows.Forms.DataGridViewImageColumn Picture;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Qty;
+        private System.Windows.Forms.DataGridViewButtonColumn Add;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProductId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QuotationProductCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
+        private System.Windows.Forms.DataGridViewImageColumn QuotationPicture;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QuotationQty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QuotationPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PriceTotal;
+        private System.Windows.Forms.DataGridViewButtonColumn DeleteButton;
     }
 }

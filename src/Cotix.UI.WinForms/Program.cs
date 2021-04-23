@@ -14,9 +14,10 @@ namespace Cotix.UI.WinForms
         [STAThread]
         static void Main()
         {
+            //Create a form for the instalation. It will create the database.
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMain());
+            Application.Run(new Quotations.frmQuotationDetail());
         }
     }
 }

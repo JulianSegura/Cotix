@@ -169,6 +169,10 @@
     <Compile Include="Migrations\20210422060430_Added-Disabled-To-Product-Entity.designer.cs">
       <DependentUpon>20210422060430_Added-Disabled-To-Product-Entity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20210423204614_Added_Company_Entity.cs" />
+    <Compile Include="Migrations\20210423204614_Added_Company_Entity.designer.cs">
+      <DependentUpon>20210423204614_Added_Company_Entity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DataContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
