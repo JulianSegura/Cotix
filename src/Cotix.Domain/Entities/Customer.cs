@@ -14,7 +14,6 @@ namespace Cotix.Domain.Entities
         public string Name { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public string CellPhone { get; set; }
 
         #region Navigation
         public virtual ICollection<Quotation> Quotations { get; private set; }
