@@ -31,10 +31,10 @@ namespace Cotix.UI.WinForms
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.pnlMainControls = new System.Windows.Forms.Panel();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnSettings = new System.Windows.Forms.Button();
+            this.btnCustomers = new System.Windows.Forms.Button();
+            this.btnProducts = new System.Windows.Forms.Button();
+            this.btnQuotations = new System.Windows.Forms.Button();
             this.pnlBody = new System.Windows.Forms.Panel();
             this.pnlMainControls.SuspendLayout();
             this.SuspendLayout();
@@ -42,91 +42,93 @@ namespace Cotix.UI.WinForms
             // pnlMainControls
             // 
             this.pnlMainControls.BackColor = System.Drawing.Color.White;
-            this.pnlMainControls.Controls.Add(this.button4);
-            this.pnlMainControls.Controls.Add(this.button3);
-            this.pnlMainControls.Controls.Add(this.button2);
-            this.pnlMainControls.Controls.Add(this.button1);
+            this.pnlMainControls.Controls.Add(this.btnSettings);
+            this.pnlMainControls.Controls.Add(this.btnCustomers);
+            this.pnlMainControls.Controls.Add(this.btnProducts);
+            this.pnlMainControls.Controls.Add(this.btnQuotations);
             this.pnlMainControls.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlMainControls.Location = new System.Drawing.Point(0, 0);
             this.pnlMainControls.Name = "pnlMainControls";
             this.pnlMainControls.Size = new System.Drawing.Size(1064, 82);
             this.pnlMainControls.TabIndex = 0;
             // 
-            // button4
+            // btnSettings
             // 
-            this.button4.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.Color.White;
-            this.button4.Image = global::Cotix.UI.WinForms.Properties.Resources.process_accept_32by32;
-            this.button4.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.button4.Location = new System.Drawing.Point(546, 11);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(168, 65);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "Configuracion";
-            this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button4.UseVisualStyleBackColor = false;
+            this.btnSettings.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.btnSettings.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSettings.FlatAppearance.BorderSize = 0;
+            this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSettings.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSettings.ForeColor = System.Drawing.Color.White;
+            this.btnSettings.Image = global::Cotix.UI.WinForms.Properties.Resources.process_accept_32by32;
+            this.btnSettings.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btnSettings.Location = new System.Drawing.Point(546, 11);
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(168, 65);
+            this.btnSettings.TabIndex = 3;
+            this.btnSettings.Text = "Configuracion";
+            this.btnSettings.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSettings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSettings.UseVisualStyleBackColor = false;
             // 
-            // button3
+            // btnCustomers
             // 
-            this.button3.BackColor = System.Drawing.Color.Teal;
-            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Image = global::Cotix.UI.WinForms.Properties.Resources.international_consumer;
-            this.button3.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.button3.Location = new System.Drawing.Point(368, 11);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(160, 65);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Clientes";
-            this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button3.UseVisualStyleBackColor = false;
+            this.btnCustomers.BackColor = System.Drawing.Color.Teal;
+            this.btnCustomers.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCustomers.FlatAppearance.BorderSize = 0;
+            this.btnCustomers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCustomers.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCustomers.ForeColor = System.Drawing.Color.White;
+            this.btnCustomers.Image = global::Cotix.UI.WinForms.Properties.Resources.international_consumer;
+            this.btnCustomers.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btnCustomers.Location = new System.Drawing.Point(368, 11);
+            this.btnCustomers.Name = "btnCustomers";
+            this.btnCustomers.Size = new System.Drawing.Size(160, 65);
+            this.btnCustomers.TabIndex = 2;
+            this.btnCustomers.Text = "Clientes";
+            this.btnCustomers.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCustomers.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnCustomers.UseVisualStyleBackColor = false;
             // 
-            // button2
+            // btnProducts
             // 
-            this.button2.BackColor = System.Drawing.Color.DarkCyan;
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Image = global::Cotix.UI.WinForms.Properties.Resources.boxes;
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.button2.Location = new System.Drawing.Point(190, 11);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(160, 65);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Productos";
-            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnProducts.BackColor = System.Drawing.Color.DarkCyan;
+            this.btnProducts.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnProducts.FlatAppearance.BorderSize = 0;
+            this.btnProducts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnProducts.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnProducts.ForeColor = System.Drawing.Color.White;
+            this.btnProducts.Image = global::Cotix.UI.WinForms.Properties.Resources.boxes;
+            this.btnProducts.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btnProducts.Location = new System.Drawing.Point(190, 11);
+            this.btnProducts.Name = "btnProducts";
+            this.btnProducts.Size = new System.Drawing.Size(160, 65);
+            this.btnProducts.TabIndex = 1;
+            this.btnProducts.Text = "Productos";
+            this.btnProducts.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnProducts.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnProducts.UseVisualStyleBackColor = false;
+            this.btnProducts.Click += new System.EventHandler(this.btnProducts_Click);
             // 
-            // button1
+            // btnQuotations
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Image = global::Cotix.UI.WinForms.Properties.Resources.accountingSmall;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.button1.Location = new System.Drawing.Point(12, 11);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(160, 65);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Cotizaciones";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnQuotations.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnQuotations.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnQuotations.FlatAppearance.BorderSize = 0;
+            this.btnQuotations.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnQuotations.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuotations.ForeColor = System.Drawing.Color.White;
+            this.btnQuotations.Image = global::Cotix.UI.WinForms.Properties.Resources.accountingSmall;
+            this.btnQuotations.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btnQuotations.Location = new System.Drawing.Point(12, 11);
+            this.btnQuotations.Name = "btnQuotations";
+            this.btnQuotations.Size = new System.Drawing.Size(160, 65);
+            this.btnQuotations.TabIndex = 0;
+            this.btnQuotations.Text = "Cotizaciones";
+            this.btnQuotations.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnQuotations.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnQuotations.UseVisualStyleBackColor = false;
+            this.btnQuotations.Click += new System.EventHandler(this.btnQuotations_Click);
             // 
             // pnlBody
             // 
@@ -162,10 +164,10 @@ namespace Cotix.UI.WinForms
         #endregion
 
         private System.Windows.Forms.Panel pnlMainControls;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnQuotations;
+        private System.Windows.Forms.Button btnSettings;
+        private System.Windows.Forms.Button btnCustomers;
+        private System.Windows.Forms.Button btnProducts;
         private System.Windows.Forms.Panel pnlBody;
     }
 }

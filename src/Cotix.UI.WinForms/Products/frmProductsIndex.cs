@@ -16,12 +16,12 @@ namespace Cotix.UI.WinForms.Products
     public partial class frmProductsIndex : BaseForm
     {
         private readonly ProductsService _productService;
+
         public frmProductsIndex()
         {
             InitializeComponent();
             _productService = new ProductsService(new UnitOfWork());
         }
-
 
         private void btnNew_Click(object sender, EventArgs e)
         {
@@ -77,10 +77,10 @@ namespace Cotix.UI.WinForms.Products
                 return;
             }
 
-            //ToDo: Verify if product is added to aqui quotation
+            //ToDo: Verify if product is added to any quotation
             //Case true: Notify and offer to Disable
             //Case false: Delete from DB 
-            var product = _productService.GetById((int)dgvDetails.SelectedRows[0].Cells["Id"].Value);
+            var productId = (int)dgvDetails.SelectedRows[0].Cells["Id"].Value;
         }
 
         private void dgvDetails_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
