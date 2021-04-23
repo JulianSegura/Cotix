@@ -50,7 +50,7 @@
             this.pnlMenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlMenu.Location = new System.Drawing.Point(0, 0);
             this.pnlMenu.Name = "pnlMenu";
-            this.pnlMenu.Size = new System.Drawing.Size(1064, 43);
+            this.pnlMenu.Size = new System.Drawing.Size(1064, 59);
             this.pnlMenu.TabIndex = 1;
             // 
             // btnSeach
@@ -63,7 +63,7 @@
             this.btnSeach.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSeach.ForeColor = System.Drawing.Color.White;
             this.btnSeach.Image = ((System.Drawing.Image)(resources.GetObject("btnSeach.Image")));
-            this.btnSeach.Location = new System.Drawing.Point(1019, 9);
+            this.btnSeach.Location = new System.Drawing.Point(1019, 24);
             this.btnSeach.Name = "btnSeach";
             this.btnSeach.Size = new System.Drawing.Size(39, 29);
             this.btnSeach.TabIndex = 13;
@@ -79,7 +79,7 @@
             this.btnDelete.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelete.ForeColor = System.Drawing.Color.White;
             this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
-            this.btnDelete.Location = new System.Drawing.Point(205, 11);
+            this.btnDelete.Location = new System.Drawing.Point(205, 26);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(28, 29);
             this.btnDelete.TabIndex = 12;
@@ -96,7 +96,7 @@
             this.btnEdit.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEdit.ForeColor = System.Drawing.Color.White;
             this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
-            this.btnEdit.Location = new System.Drawing.Point(169, 11);
+            this.btnEdit.Location = new System.Drawing.Point(169, 26);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(28, 29);
             this.btnEdit.TabIndex = 11;
@@ -113,7 +113,7 @@
             this.btnNew.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNew.ForeColor = System.Drawing.Color.White;
             this.btnNew.Image = ((System.Drawing.Image)(resources.GetObject("btnNew.Image")));
-            this.btnNew.Location = new System.Drawing.Point(133, 11);
+            this.btnNew.Location = new System.Drawing.Point(133, 26);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(28, 29);
             this.btnNew.TabIndex = 10;
@@ -124,7 +124,7 @@
             // txtSearch
             // 
             this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSearch.Location = new System.Drawing.Point(613, 9);
+            this.txtSearch.Location = new System.Drawing.Point(613, 24);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(405, 29);
             this.txtSearch.TabIndex = 9;
@@ -134,7 +134,7 @@
             this.lblRunningForm.AutoSize = true;
             this.lblRunningForm.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRunningForm.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblRunningForm.Location = new System.Drawing.Point(-4, 9);
+            this.lblRunningForm.Location = new System.Drawing.Point(-4, 28);
             this.lblRunningForm.Name = "lblRunningForm";
             this.lblRunningForm.Size = new System.Drawing.Size(160, 25);
             this.lblRunningForm.TabIndex = 2;

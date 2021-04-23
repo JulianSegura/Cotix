@@ -2,15 +2,8 @@
 using Cotix.Domain.Entities;
 using Cotix.Infrastructure;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Cotix.UI.WinForms.Products
@@ -161,18 +154,6 @@ namespace Cotix.UI.WinForms.Products
             return false;
         }
 
-        private void chkDisable_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkDisable.Checked) 
-            {
-                chkDisable.Text = "Habilitado";
-                chkDisable.ForeColor = Color.Green;
-                return;
-            } 
-            chkDisable.Text = "Desabilitado";
-            chkDisable.ForeColor = Color.Red;
-        }
-
         private void chkDisable_MouseEnter(object sender, EventArgs e)
         {
             ToolTip tt = new ToolTip();
@@ -227,14 +208,37 @@ namespace Cotix.UI.WinForms.Products
 
         private void Fill(Product product)
         {
-            //ToDo: Format cost & Price to Money representation.
             txtProductCode.Text = product.Code;
-            chkDisable.Checked = !product.Disabled;//Check this out, why is it not changing the checkbox color?
+            ChangeCheckDisabled(!product.Disabled);
             txtDescription.Text = product.Description;
             txtSpecification.Text = product.Specification;
             txtCost.Text = product.Cost.ToString();
             txtPrice.Text = product.Price.ToString();
             pbProductPicture.ImageLocation = product.PicturePath;
+        }
+
+        private void ChangeCheckDisabled(bool status)
+        {
+            if (status == true)
+            {
+                chkDisable.Checked = true;
+                chkDisable.Text = "Habilitado";
+                chkDisable.ForeColor = Color.Green;
+                return;
+            }
+            chkDisable.Checked = false;
+            chkDisable.Text = "Desabilitado";
+            chkDisable.ForeColor = Color.Red;
+        }
+
+        private void chkDisable_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkDisable.Checked)
+            {
+                ChangeCheckDisabled(true);
+                return;
+            }
+            ChangeCheckDisabled(false);
         }
     }
 }
