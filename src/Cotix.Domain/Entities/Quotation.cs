@@ -10,6 +10,7 @@ namespace Cotix.Domain.Entities
             Details = new HashSet<QuotationDetail>();
         }
         public DateTime ValidUntil { get; set; }
+        public decimal TransportationFee { get; set; }
         public decimal Total { get; set; }
 
         #region Navigation

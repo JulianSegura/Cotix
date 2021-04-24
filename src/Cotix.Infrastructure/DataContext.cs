@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,6 +15,7 @@ namespace Cotix.Infrastructure
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             builder.UseSqlServer(CnString);
+
             base.OnConfiguring(builder);
         }
 
@@ -22,6 +24,7 @@ namespace Cotix.Infrastructure
         public virtual DbSet<Quotation> Quotations { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<QuotationDetail> QuotationDetails { get; set; }
+        public DbSet<Company> Company { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -16,5 +16,13 @@ namespace Cotix.UI.WinForms.Quotations
         {
             InitializeComponent();
         }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            using (frmQuotationDetail f=new frmQuotationDetail())
+            {
+                f.ShowDialog();
+            }
+        }
     }
 }
