@@ -29,8 +29,24 @@ namespace Cotix.UI.WinForms.Quotations
 
         private void chkAddTransportation_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkAddTransportation.Checked) txtTransportationCost.Visible = true;
-            else txtTransportationCost.Visible = false;
+
+            if (chkAddTransportation.Checked) 
+            {
+                txtTransportationCost.Visible = true;
+                txtTransportationCost.Focus();
+                lblTransportationTittle.Visible = true;
+                lblTotalTittle.Location = new Point(437, 504);
+                lblTotal.Location = new Point(481, 495);
+                return;
+            } 
+            
+            txtTransportationCost.Visible = false;
+            txtTransportationCost.Clear();
+            lblTransportationTittle.Visible = false;
+            lblTotalTittle.Location = new Point(437, 484);
+            lblTotal.Location = new Point(481, 475);
+            
+            
         }
 
         private bool HandleKey(ref TextBox textbox, char keycode)
@@ -49,8 +65,9 @@ namespace Cotix.UI.WinForms.Quotations
 
         private void frmQuotationDetail_Load(object sender, EventArgs e)
         {
+            dtpValidUntil.CustomFormat = "dd-MM-yyyy";
             dtpValidUntil.MinDate = DateTime.Today;
-            FillProductsDatagrid(_productService.GetAll().Where(p=>p.Disabled==false).ToList());
+            FillProductsDatagrid(_productService.GetAll().Where(p => p.Disabled == false).ToList());
         }
 
         private void FillProductsDatagrid(ICollection<Product> products)
@@ -141,10 +158,20 @@ namespace Cotix.UI.WinForms.Quotations
 
         private void txtDaysValid_KeyPress(object sender, KeyPressEventArgs e)
         {
+            HandleKey(sender, e);
+        }
+
+        private void HandleKey(object sender, KeyPressEventArgs e)
+        {
             bool isDigit = char.IsDigit(e.KeyChar);
             bool isBackKey = e.KeyChar == (char)Keys.Back;
 
             e.Handled = !isDigit && !isBackKey;
+        }
+
+        private void txtTransportationCost_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            HandleKey(sender, e);
         }
     }
 }
