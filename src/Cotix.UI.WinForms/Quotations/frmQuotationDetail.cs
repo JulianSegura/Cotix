@@ -15,9 +15,9 @@ namespace Cotix.UI.WinForms.Quotations
 {
     public partial class frmQuotationDetail : Form
     {
-        //ToDo: Add a clear/cancel button
-        //TODo: Add ToolTips to the buttons
         //ToDo: If the call action is to add, Quotation ID must be invisible.
+        //ToDo: Add function to verify added product in quotation grid and increase quantity.
+        //ToDo: Add function to calculate and display totals.
 
         private readonly ProductsService _productService;
 
@@ -62,7 +62,7 @@ namespace Cotix.UI.WinForms.Quotations
                 DataGridViewRow row = new DataGridViewRow();
                 row.CreateCells(dgvProducts);
                 picture = product.PicturePath != "" ? new Bitmap(new Bitmap(product.PicturePath), 64, 64) : new Bitmap(Properties.Resources.boxes, 64, 64);
-                row.SetValues(product.Id, product.Code, product.Specification, picture, $"{product.Price:C}",1,"Agregar");
+                row.SetValues(product.Id, product.Code, product.Description, picture, $"{product.Price:C}",1,"Agregar");
                 dgvProducts.Rows.Add(row);
             }
 
@@ -72,10 +72,18 @@ namespace Cotix.UI.WinForms.Quotations
         private void dgvProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (!DataGridButtonClicked(sender, e)) return;
-            
+
+            int qty;
+
+            if(!int.TryParse(dgvProducts.Rows[e.RowIndex].Cells["Qty"].Value.ToString(),out qty))
+            {
+                MessageBox.Show("Debe ingresar solo numeros en el campo cantidad","COTIX");
+                return;
+            }
+
             int productId = (int)dgvProducts.Rows[e.RowIndex].Cells["Id"].Value;
             var product = _productService.GetById(productId);
-            var qty = int.Parse(dgvProducts.Rows[e.RowIndex].Cells["Qty"].Value.ToString());
+ 
                
             AddItemToQuotation(product,qty);
 
@@ -98,7 +106,7 @@ namespace Cotix.UI.WinForms.Quotations
             row.CreateCells(dgvQuotationDetails);
 
             picture = product.PicturePath != "" ? new Bitmap(new Bitmap(product.PicturePath), 64, 64) : new Bitmap(Properties.Resources.boxes, 64, 64);
-            row.SetValues(product.Id, product.Code, product.Description, picture,quantity, $"{product.Price:C}",$"{product.Price*quantity:c}", "X");
+            row.SetValues(product.Id, product.Code, product.Description, picture,quantity, $"{product.Price:C}",$"{product.Price*quantity:c}", "Eliminar");
             dgvQuotationDetails.Rows.Add(row);
 
             dgvQuotationDetails.Rows[dgvQuotationDetails.Rows.Count-1].Selected = true;
@@ -109,6 +117,34 @@ namespace Cotix.UI.WinForms.Quotations
             if (!DataGridButtonClicked(sender, e)) return;
 
             dgvQuotationDetails.Rows.RemoveAt(e.RowIndex);
+        }
+
+        private void btnExportExcel_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTip t = new ToolTip();
+            t.SetToolTip(btnExportExcel, "Exportar A Excel");
+        }
+
+        private void btnExportPDF_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTip t = new ToolTip();
+            t.SetToolTip(btnExportPDF, "Exportar A PDF");
+        }
+
+        private void txtDaysValid_TextChanged(object sender, EventArgs e)
+        {
+            if (txtDaysValid.Text.Length < 1) return;
+
+            var days = double.Parse(txtDaysValid.Text);
+            dtpValidUntil.Value = DateTime.Today.AddDays(days);
+        }
+
+        private void txtDaysValid_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            bool isDigit = char.IsDigit(e.KeyChar);
+            bool isBackKey = e.KeyChar == (char)Keys.Back;
+
+            e.Handled = !isDigit && !isBackKey;
         }
     }
 }

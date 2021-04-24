@@ -22,8 +22,6 @@ namespace Cotix.UI.WinForms.Quotations
             using (frmQuotationDetail f=new frmQuotationDetail())
             {
                 f.ShowDialog();
-
-                //ToDo: Add method to fill quotations datagrid
             }
         }
     }
