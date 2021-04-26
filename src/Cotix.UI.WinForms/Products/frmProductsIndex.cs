@@ -43,12 +43,11 @@ namespace Cotix.UI.WinForms.Products
         private void FillProductsDatagrid(ICollection<Product> products)
         {
             dgvDetails.Rows.Clear();
-            var picture = new Bitmap(128, 128);
             foreach (var product in products)
             {
                 DataGridViewRow row = new DataGridViewRow();
                 row.CreateCells(dgvDetails);
-                picture = product.PicturePath != "" ? new Bitmap(new Bitmap(product.PicturePath), 128, 128) : new Bitmap(Properties.Resources.boxes, 128, 128);
+                var picture = product.PicturePath != "" ? new Bitmap(new Bitmap(product.PicturePath), 128, 128) : new Bitmap(Properties.Resources.boxes, 128, 128);
                 row.SetValues(product.Id, product.Code, product.Specification, product.Description, $"{product.Price:C}", product.PicturePath, picture, !product.Disabled);
                 dgvDetails.Rows.Add(row);
             }
@@ -56,7 +55,7 @@ namespace Cotix.UI.WinForms.Products
             dgvDetails.ClearSelection();
         }
 
-        private void btnEdit_Click(object sender, EventArgs e)
+        private void BtnEdit_Click(object sender, EventArgs e)
         {
             if (dgvDetails.SelectedRows.Count < 1)
             {
@@ -74,7 +73,7 @@ namespace Cotix.UI.WinForms.Products
             }
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void BtnDelete_Click(object sender, EventArgs e)
         {
             //Verify anything selected on datagrid
             if (dgvDetails.SelectedRows.Count < 1)
@@ -98,6 +97,36 @@ namespace Cotix.UI.WinForms.Products
                     f.Tag = dgvDetails.Rows[e.RowIndex].Cells["PicturePath"].Value;
                     f.ShowDialog();
                 }
+            }
+        }
+
+        private bool gridFiltered;
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            //Verify text length if datagridview is not filtered
+            if (!gridFiltered && txtSearch.Text.Trim().Length < 4) return;
+
+            //Show all rows in case the textbox is les than 4
+            if (gridFiltered && txtSearch.Text.Trim().Length < 4)
+            {
+                foreach (DataGridViewRow row in dgvDetails.Rows) row.Visible = true;
+                gridFiltered = false;
+                return;
+            }
+
+            string searchParam = txtSearch.Text.Trim().ToUpper();
+
+            //Search by product code or by product description. 
+            //If the seachParam is not in the product code or description I make the row invisible
+            //that way I dont need to go the the database
+            foreach (DataGridViewRow row in dgvDetails.Rows)
+            {
+                row.Visible = true;
+                var productCode = row.Cells["ProductCode"].Value.ToString().ToUpper();
+                var productDesc = row.Cells["Description"].Value.ToString().ToUpper();
+                if (!productCode.Contains(searchParam) && !productDesc.Contains(searchParam)) row.Visible = false;
+
+                gridFiltered = true;
             }
         }
     }

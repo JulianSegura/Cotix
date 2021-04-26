@@ -40,6 +40,7 @@ namespace Cotix.UI.WinForms.Quotations
             // btnSeach
             // 
             this.btnSeach.FlatAppearance.BorderSize = 0;
+            this.btnSeach.Location = new System.Drawing.Point(1020, 24);
             // 
             // btnDelete
             // 
@@ -59,6 +60,7 @@ namespace Cotix.UI.WinForms.Quotations
             // 
             // txtSearch
             // 
+            this.txtSearch.Location = new System.Drawing.Point(614, 24);
             this.txtSearch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             // 
             // frmQuotationsIndex
