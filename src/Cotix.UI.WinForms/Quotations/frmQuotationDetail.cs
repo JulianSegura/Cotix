@@ -15,10 +15,9 @@ namespace Cotix.UI.WinForms.Quotations
 {
     public partial class frmQuotationDetail : Form
     {
-        //ToDo: If the call action is to add, Quotation ID must be invisible.
-        //ToDo: Implement Customer Autocomplete
-
         private readonly ProductsService _productService;
+        private readonly CustomersService _customerService;
+        private readonly UnitOfWork _uow= new UnitOfWork();
         private decimal QuotationSubTotal;
         private decimal TransportationCost;
         private decimal QuotationTotal;
@@ -26,7 +25,8 @@ namespace Cotix.UI.WinForms.Quotations
         public frmQuotationDetail()
         {
             InitializeComponent();
-            _productService = new ProductsService(new UnitOfWork());
+            _productService = new ProductsService(_uow);
+            _customerService = new CustomersService(_uow);
         }
 
         private void chkAddTransportation_CheckedChanged(object sender, EventArgs e)
@@ -225,18 +225,18 @@ namespace Cotix.UI.WinForms.Quotations
             ShowTotals();
         }
 
-        private bool gridFiltered;
+        private bool _gridFiltered;
         private void txtProductSearch_TextChanged(object sender, EventArgs e)
         {
 
             //Verify text length if datagridview is not filtered
-            if (!gridFiltered && txtProductSearch.Text.Trim().Length < 4) return;
+            if (!_gridFiltered && txtProductSearch.Text.Trim().Length < 4) return;
 
             //Show all rows in case grid is filtered and the textbox is les than 4
-            if (gridFiltered && txtProductSearch.Text.Trim().Length < 4)
+            if (_gridFiltered && txtProductSearch.Text.Trim().Length < 4)
             {
                 foreach (DataGridViewRow row in dgvProducts.Rows) row.Visible = true;
-                gridFiltered = false;
+                _gridFiltered = false;
                 return;
             }
 
@@ -251,16 +251,16 @@ namespace Cotix.UI.WinForms.Quotations
                 var productDesc = row.Cells["ProductDescription"].Value.ToString().ToUpper();
                 if (!productCode.Contains(searchParam) && !productDesc.Contains(searchParam)) row.Visible = false;
                 
-                gridFiltered = true;
+                _gridFiltered = true;
             }
         }
 
-        double previousValue;
+        private double _cellValueBeforeEdit; //Used to store the value of the gridCell before it is changed.
         private void dgvQuotationDetails_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
             if (dgvQuotationDetails.IsCurrentCellDirty)
             {
-                previousValue = double.Parse(dgvQuotationDetails.CurrentCell.Value.ToString());
+                _cellValueBeforeEdit = double.Parse(dgvQuotationDetails.CurrentCell.Value.ToString());
             }
         }
 
@@ -273,7 +273,7 @@ namespace Cotix.UI.WinForms.Quotations
             if (!double.TryParse(editedCell.Value.ToString(), out double qty))
             {
                 MessageBox.Show("Debe ingresar solo numeros en el campo cantidad", "COTIX");
-                editedCell.Value = previousValue;
+                editedCell.Value = _cellValueBeforeEdit;
                 return;
             }
 
@@ -306,6 +306,76 @@ namespace Cotix.UI.WinForms.Quotations
             txtCustomerCompany.Clear();
             txtCustomerEmail.Clear();
             txtCustomerPhone.Clear();
+        }
+
+        private bool _needUpdate = true;//used to verify if the items list on combobox needs to be updated.
+
+        private void cmbCustomerName_TextChanged(object sender, EventArgs e)
+        {
+            if (cmbCustomerName.Text.Trim().Length < 4) _needUpdate = true;
+
+            if (cmbCustomerName.Text.Trim().Length < 4 || !_needUpdate) return;
+
+            var searchParam = cmbCustomerName.Text.Trim();
+            
+            cmbCustomerName.Items.Clear();
+            var customers = _customerService.GetMatchingCustomers(searchParam);
+            if (customers.Count < 1) //If my customer query didn't return anything, I dont need to query everytime the text changes
+            {
+                cmbCustomerName.Text = searchParam; //These 3 lines are to avoid the writen text being deleted
+                cmbCustomerName.SelectionStart = searchParam.Length;
+                cmbCustomerName.SelectionLength = 0;
+                _needUpdate = false;
+                return;
+            }
+
+            foreach (var cust in customers) cmbCustomerName.Items.Add(cust);
+            _needUpdate = false; //After I load my items to the list, I dont need to updated again, unless the text is cleared.
+
+            cmbCustomerName.ValueMember = "Id";
+            cmbCustomerName.DisplayMember = "Name";
+            cmbCustomerName.AutoCompleteMode = AutoCompleteMode.Suggest;
+            cmbCustomerName.DroppedDown = true;
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void cmbCustomerName_Leave(object sender, EventArgs e)
+        {
+            if (cmbCustomerName.Items.Count > 0) return;
+
+            lblCustomerNotAdded.Visible = true;
+            btnAddCustomer.Visible = true;
+            txtCustomerCompany.Clear();
+            txtCustomerEmail.Clear();
+            txtCustomerPhone.Clear();
+            lblCustomerIdLabel.Visible = false;
+            lblCustomerId.Visible = false;
+        }
+
+        private void cmbCustomerName_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            var selectedCustomer = cmbCustomerName.SelectedItem as Customer;
+            if (selectedCustomer is null) return;
+
+            txtCustomerCompany.Text = selectedCustomer.Company;
+            txtCustomerEmail.Text = selectedCustomer.Email;
+            txtCustomerPhone.Text = selectedCustomer.PhoneNumber;
+            lblCustomerIdLabel.Visible = true;
+            lblCustomerId.Visible = true;
+            lblCustomerId.Text = selectedCustomer.Id.ToString();
+
+            lblCustomerNotAdded.Visible = false;
+            btnAddCustomer.Visible = false;
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {//This method is used to mimick tab key as the enter key for comboCustomer
+            if (this.cmbCustomerName.DroppedDown && keyData == Keys.Tab)
+            {
+                SendKeys.Send("{ENTER}");
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }
