@@ -17,7 +17,7 @@ namespace Cotix.UI.WinForms
             //Create a form for the instalation. It will create the database.
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Quotations.frmQuotationDetail());
+            Application.Run(new frmMain());
         }
     }
 }

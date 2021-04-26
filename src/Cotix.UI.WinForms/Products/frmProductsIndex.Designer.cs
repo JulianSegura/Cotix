@@ -60,13 +60,13 @@ namespace Cotix.UI.WinForms.Products
             // 
             this.btnDelete.FlatAppearance.BorderSize = 0;
             this.btnDelete.Location = new System.Drawing.Point(206, 26);
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
             // btnEdit
             // 
             this.btnEdit.FlatAppearance.BorderSize = 0;
             this.btnEdit.Location = new System.Drawing.Point(170, 26);
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            this.btnEdit.Click += new System.EventHandler(this.BtnEdit_Click);
             // 
             // btnNew
             // 
@@ -77,6 +77,7 @@ namespace Cotix.UI.WinForms.Products
             // txtSearch
             // 
             this.txtSearch.Location = new System.Drawing.Point(614, 24);
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // dgvDetails
             // 

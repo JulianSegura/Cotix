@@ -27,7 +27,8 @@ namespace Cotix.UI.WinForms
 
         private void OpenForm<F>() where F : BaseForm, new()
         {
-            var childForm = MdiChildren.OfType<F>().FirstOrDefault();
+            
+            var childForm = pnlBody.Controls.OfType<F>().FirstOrDefault();
 
             if (childForm == null)
             {
@@ -35,7 +36,7 @@ namespace Cotix.UI.WinForms
                 {
                     TopLevel = false,
                     Dock = DockStyle.Fill,
-                    TopMost = false,
+                    TopMost = false
                 };
                 pnlBody.Controls.Add(childForm);
                 childForm.BringToFront();
