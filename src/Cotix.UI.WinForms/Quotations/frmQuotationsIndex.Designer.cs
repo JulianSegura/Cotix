@@ -30,9 +30,10 @@ namespace Cotix.UI.WinForms.Quotations
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dtpDateFrom = new System.Windows.Forms.DateTimePicker();
             this.dtpDateTo = new System.Windows.Forms.DateTimePicker();
             this.cmbFilterDate = new System.Windows.Forms.ComboBox();
@@ -44,6 +45,7 @@ namespace Cotix.UI.WinForms.Quotations
             this.QuotationId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DaysValid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CreatedAt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ValidUntil = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.QuotationSubTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.QuotationTransportation = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -83,7 +85,8 @@ namespace Cotix.UI.WinForms.Quotations
             // btnSeach
             // 
             this.btnSeach.FlatAppearance.BorderSize = 0;
-            this.btnSeach.Location = new System.Drawing.Point(1020, 24);
+            this.btnSeach.Location = new System.Drawing.Point(675, 24);
+            this.btnSeach.Click += new System.EventHandler(this.btnSeach_Click);
             // 
             // btnDelete
             // 
@@ -103,7 +106,7 @@ namespace Cotix.UI.WinForms.Quotations
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(681, 24);
+            this.txtSearch.Location = new System.Drawing.Point(723, 24);
             this.txtSearch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtSearch.Size = new System.Drawing.Size(338, 29);
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
@@ -182,7 +185,7 @@ namespace Cotix.UI.WinForms.Quotations
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.label4.Location = new System.Drawing.Point(680, 9);
+            this.label4.Location = new System.Drawing.Point(722, 9);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(167, 15);
             this.label4.TabIndex = 20;
@@ -210,19 +213,20 @@ namespace Cotix.UI.WinForms.Quotations
             this.QuotationId,
             this.CustomerName,
             this.DaysValid,
+            this.CreatedAt,
             this.ValidUntil,
             this.QuotationSubTotal,
             this.QuotationTransportation,
             this.QuotationTotal});
             this.dgvDetails.Cursor = System.Windows.Forms.Cursors.Hand;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.CadetBlue;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDetails.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.CadetBlue;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDetails.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDetails.EnableHeadersVisualStyles = false;
             this.dgvDetails.Location = new System.Drawing.Point(0, 59);
@@ -230,14 +234,14 @@ namespace Cotix.UI.WinForms.Quotations
             this.dgvDetails.Name = "dgvDetails";
             this.dgvDetails.ReadOnly = true;
             this.dgvDetails.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDetails.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDetails.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvDetails.RowHeadersWidth = 15;
             this.dgvDetails.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvDetails.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -265,11 +269,22 @@ namespace Cotix.UI.WinForms.Quotations
             this.DaysValid.ReadOnly = true;
             this.DaysValid.Width = 140;
             // 
-            // ValidUntil
+            // CreatedAt
             // 
             dataGridViewCellStyle2.Format = "D";
             dataGridViewCellStyle2.NullValue = null;
-            this.ValidUntil.DefaultCellStyle = dataGridViewCellStyle2;
+            this.CreatedAt.DefaultCellStyle = dataGridViewCellStyle2;
+            this.CreatedAt.HeaderText = "CreatedAt";
+            this.CreatedAt.Name = "CreatedAt";
+            this.CreatedAt.ReadOnly = true;
+            this.CreatedAt.Visible = false;
+            this.CreatedAt.Width = 103;
+            // 
+            // ValidUntil
+            // 
+            dataGridViewCellStyle3.Format = "D";
+            dataGridViewCellStyle3.NullValue = null;
+            this.ValidUntil.DefaultCellStyle = dataGridViewCellStyle3;
             this.ValidUntil.HeaderText = "Valida Hasta";
             this.ValidUntil.Name = "ValidUntil";
             this.ValidUntil.ReadOnly = true;
@@ -328,6 +343,7 @@ namespace Cotix.UI.WinForms.Quotations
         private System.Windows.Forms.DataGridViewTextBoxColumn QuotationId;
         private System.Windows.Forms.DataGridViewTextBoxColumn CustomerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn DaysValid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CreatedAt;
         private System.Windows.Forms.DataGridViewTextBoxColumn ValidUntil;
         private System.Windows.Forms.DataGridViewTextBoxColumn QuotationSubTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn QuotationTransportation;

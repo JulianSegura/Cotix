@@ -59,7 +59,16 @@ namespace Cotix.UI.WinForms.Quotations
                 {
                     DataGridViewRow row = new DataGridViewRow();
                     row.CreateCells(dgvDetails);
-                    row.SetValues(quotation.Id, quotation.Customer.Name, (quotation.ValidUntil.AddDays(1) - quotation.CreatedAt).Days,quotation.ValidUntil.Date, $"{quotation.SubTotal:C}", $"{quotation.TransportationFee:C}", $"{quotation.Total:C}");
+                    row.SetValues
+                        (quotation.Id,
+                        quotation.Customer.Name,
+                        (quotation.ValidUntil.AddDays(1) - quotation.CreatedAt).Days,
+                        quotation.CreatedAt,
+                        quotation.ValidUntil.Date,
+                        $"{quotation.SubTotal:C}",
+                        $"{quotation.TransportationFee:C}",
+                        $"{quotation.Total:C}");
+
                     dgvDetails.Rows.Add(row);
                 }
             }
@@ -101,6 +110,47 @@ namespace Cotix.UI.WinForms.Quotations
         {
             foreach (DataGridViewRow row in dgvDetails.Rows) row.Visible = true;
             gridFiltered = false;
+        }
+
+        private void btnSeach_Click(object sender, EventArgs e)
+        {
+            var dateFrom = new DateTime();
+            var dateTo = new DateTime();
+            string filterColumn = "";
+
+            switch (cmbFilterDate.SelectedIndex)
+            {
+                case 1:
+                    //filter by createdAt date
+                    filterColumn = "CreatedAt";
+                    dateFrom = dtpDateFrom.Value.Date;
+                    dateTo = dtpDateTo.Value.Date;
+                    FilterGridByDate(filterColumn,dateFrom,dateTo);
+                    break;
+                case 2:
+                    //filter by validUntil date ValidUntil
+                    filterColumn = "ValidUntil";
+                    dateFrom = dtpDateFrom.Value.Date;
+                    dateTo = dtpDateTo.Value.Date;
+                    FilterGridByDate(filterColumn, dateFrom, dateTo);
+                    break;
+                default:
+                    if (gridFiltered) UnfilterGrid();
+                    break;
+            }
+        }
+
+        private void FilterGridByDate(string filterColumn, DateTime dateFrom, DateTime dateTo)
+        {
+            foreach (DataGridViewRow row in dgvDetails.Rows)
+            {
+                row.Visible = true;
+
+                var quotationDate = Convert.ToDateTime(row.Cells[$"{filterColumn}"].Value).Date;
+                if (!(quotationDate >= dateFrom && quotationDate<=dateTo)) row.Visible = false;
+
+                gridFiltered = true;
+            }
         }
     }
 }
