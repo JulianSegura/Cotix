@@ -37,5 +37,24 @@ namespace Cotix.AppLayer
 
             return response;
         }
+
+        public ServiceResponse<Quotation> Update(Quotation quotation)
+        {
+            var response = new ServiceResponse<Quotation>();
+            try
+            {
+                _quotationsRepo.Update(quotation);
+                _UoW.Complete();
+                response.IsSuccessful = true;
+                response.ResultObject = quotation;
+            }
+            catch (Exception e)
+            {
+
+                response.SetException(e);
+            }
+
+            return response;
+        }
     }
 }

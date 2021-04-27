@@ -64,7 +64,7 @@ namespace Cotix.Infrastructure
             {
                 _context.SaveChanges();
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 throw;
             }

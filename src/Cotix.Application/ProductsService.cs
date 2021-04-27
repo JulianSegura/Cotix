@@ -12,11 +12,13 @@ namespace Cotix.AppLayer
     {
         private readonly IUnitOfWork _uow;
         private readonly IRepository<Product> _productsRepo;
+        private readonly IRepository<Quotation> _quotationsRepo;
 
         public ProductsService(IUnitOfWork UoW)
         {
             _uow = UoW;
             _productsRepo = _uow.ProductsRepo;
+            _quotationsRepo = _uow.QuotationsRepo;
         }
 
         public ICollection<Product> GetAll()
@@ -38,6 +40,7 @@ namespace Cotix.AppLayer
             if (productCode != null)
             {
                 lst = _productsRepo.Get(p => p.Code == productCode.ToUpper()).ToList();
+                return lst;
             }
 
             if (productDesc != null)
@@ -86,20 +89,23 @@ namespace Cotix.AppLayer
             return response;
         }
 
-        public ServiceResponse<Product> Delete(int id)
+        public bool Delete(int id)
         {
-            var response = new ServiceResponse<Product>();
             try
             {
                 _productsRepo.Delete(id);
                 _uow.Complete();
-                response.IsSuccessful = true;
+                return true;
             }
-            catch (SqlException e)
+            catch (Exception)
             {
-                response.SetException(e);
+                return false;
             }
-            return response;
+        }
+
+        public bool IsInQuotation(Product product)
+        {
+            return _quotationsRepo.Get(q => q.Details.Any(d => d.Product.Id == product.Id)).Any();
         }
     }
 }

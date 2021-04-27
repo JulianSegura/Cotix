@@ -17,7 +17,7 @@ namespace Cotix.UI.WinForms.Quotations
     {
         //ToDo: Update Quotation
         //ToDo: Quotation Report
-        //ToDo: Program QuotationIndex Form (Filters: Customer, Date range)
+        //ToDo: Program QuotationIndex Form (And add Filters: Customer, Date range)
 
         private readonly ProductsService _productService;
         private readonly CustomersService _customerService;
@@ -396,7 +396,8 @@ namespace Cotix.UI.WinForms.Quotations
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {//This method is used to mimick tab key as the enter key for comboCustomer
+        {
+            //This method is used to mimick tab key as the enter key for comboCustomer
             if (this.cmbCustomerName.DroppedDown && keyData == Keys.Tab)
             {
                 SendKeys.Send("{ENTER}");
@@ -472,7 +473,7 @@ namespace Cotix.UI.WinForms.Quotations
             //Run warning info validations (date & transportation cost)
 
             //Collect information
-            var quotation = new Quotation();
+            var quotation = Tag as Quotation ?? new Quotation();
 
             quotation.Customer = (Customer)cmbCustomerName.SelectedItem;
             quotation.ValidUntil = dtpValidUntil.Value;
@@ -495,8 +496,7 @@ namespace Cotix.UI.WinForms.Quotations
             quotation.Total = QuotationTotal;
 
             //Save Quotation
-
-            var response = _quotationService.Add(quotation);
+            var response = Tag==null? _quotationService.Add(quotation):_quotationService.Update(quotation);
 
             if (response.IsSuccessful)
             {
@@ -514,6 +514,7 @@ namespace Cotix.UI.WinForms.Quotations
                 btnExportExcel.Enabled = true;
 
                 EnableSave(false);
+                Tag = response.ResultObject;
             }
             else
             {
@@ -540,6 +541,11 @@ namespace Cotix.UI.WinForms.Quotations
         private void EnableSave(bool value)
         {
             if (lblQuotationNumber.Visible) btnSave.Enabled = value;
+        }
+
+        private void dtpValidUntil_ValueChanged(object sender, EventArgs e)
+        {
+            EnableSave(true);
         }
     }
 }

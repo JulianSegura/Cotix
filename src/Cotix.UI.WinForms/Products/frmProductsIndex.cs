@@ -1,6 +1,7 @@
 ﻿using Cotix.AppLayer;
 using Cotix.Domain.Entities;
 using Cotix.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -79,20 +80,24 @@ namespace Cotix.UI.WinForms.Products
             //Verify anything selected on datagrid
             if (dgvDetails.SelectedRows.Count < 1)
             {
-                MessageBox.Show("Debe Seleccionar Un Producto A Borrar","COTIX");
+                MessageBox.Show("Debe Seleccionar Un Producto A Borrar","COTIX",MessageBoxButtons.OK,MessageBoxIcon.Warning);
                 return;
             }
 
-            //ToDo: Verify if product is added to any quotation
-            //Case true: Notify and offer to Disable//Exception #547 is foreign key delete constraint
-            //Case false: Delete from DB 
             var productId = (int)dgvDetails.SelectedRows[0].Cells["Id"].Value;
-            var response = _productService.Delete(productId);
+            var product = _productService.GetById(productId);
 
-            if (!response.IsSuccessful)
+            //Verify if product is added to any quotation
+            if (_productService.IsInQuotation(product))
             {
-                MessageBox.Show("Test");
+                //Case true: Notify
+                MessageBox.Show($"No se puede eliminar el producto. Ya esta en una cotizacion","COTIX",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                return;
             }
+
+            //Case false: Delete from DB 
+            _productService.Delete(productId);
+            FillProductsDatagrid(_productService.GetAll());
         }
 
         private void dgvDetails_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
