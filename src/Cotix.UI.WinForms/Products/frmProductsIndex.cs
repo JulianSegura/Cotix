@@ -1,4 +1,5 @@
 ﻿using Cotix.AppLayer;
+using Cotix.AppLayer.Interfaces;
 using Cotix.Domain.Entities;
 using Cotix.Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -17,11 +18,10 @@ namespace Cotix.UI.WinForms.Products
     public partial class frmProductsIndex : BaseForm
     {
         private readonly ProductsService _productService;
-
-        public frmProductsIndex()
+        public frmProductsIndex(UnitOfWork UoW)
         {
             InitializeComponent();
-            _productService = new ProductsService(new UnitOfWork());
+            _productService = new ProductsService(UoW);
         }
 
         private void btnNew_Click(object sender, EventArgs e)
@@ -40,6 +40,12 @@ namespace Cotix.UI.WinForms.Products
         private void frmProductsIndex_Load(object sender, EventArgs e)
         {
             FillProductsDatagrid(_productService.GetAll());
+            cmbFilter.Items.Insert(0,"Todos");
+            cmbFilter.Items.Insert(1,"Activo");
+            cmbFilter.Items.Insert(2,"Inactivo");
+
+            cmbFilter.SelectedIndex = 0;
+
         }
 
         private void FillProductsDatagrid(ICollection<Product> products)
@@ -61,7 +67,7 @@ namespace Cotix.UI.WinForms.Products
         {
             if (dgvDetails.SelectedRows.Count < 1)
             {
-                MessageBox.Show("Seleccionar Un Producto Para Editar", "COTIX");
+                MessageBox.Show("Seleccionar Un Producto Para Editar", "COTIX",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 return;
             }
 
@@ -80,7 +86,7 @@ namespace Cotix.UI.WinForms.Products
             //Verify anything selected on datagrid
             if (dgvDetails.SelectedRows.Count < 1)
             {
-                MessageBox.Show("Debe Seleccionar Un Producto A Borrar","COTIX",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                MessageBox.Show("Debe Seleccionar Un Producto A Borrar","COTIX",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 return;
             }
 
@@ -96,6 +102,9 @@ namespace Cotix.UI.WinForms.Products
             }
 
             //Case false: Delete from DB 
+            var confirm = MessageBox.Show("Seguro que desea ELIMINAR este producto?","COTIX",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+            if (confirm != DialogResult.Yes) return;
+
             _productService.Delete(productId);
             FillProductsDatagrid(_productService.GetAll());
         }
@@ -121,17 +130,15 @@ namespace Cotix.UI.WinForms.Products
             //Show all rows in case the textbox is les than 4
             if (gridFiltered && txtSearch.Text.Trim().Length < 4)
             {
-                foreach (DataGridViewRow row in dgvDetails.Rows) row.Visible = true;
-                gridFiltered = false;
+                UnfilterGrid();
                 return;
             }
-
-            string searchParam = txtSearch.Text.Trim().ToUpper();
 
             //Search by product code or by product description. 
             //If the seachParam is not in the product code or description I make the row invisible
             //that way I dont need to go the the database
             //ToDo: Test this functionality in an extention method fof the datagrid view class
+            string searchParam = txtSearch.Text.Trim().ToUpper();
             foreach (DataGridViewRow row in dgvDetails.Rows)
             {
                 row.Visible = true;
@@ -140,6 +147,40 @@ namespace Cotix.UI.WinForms.Products
                 if (!productCode.Contains(searchParam) && !productDesc.Contains(searchParam)) row.Visible = false;
 
                 gridFiltered = true;
+            }
+        }
+
+        private void UnfilterGrid()
+        {
+            foreach (DataGridViewRow row in dgvDetails.Rows) row.Visible = true;
+            gridFiltered = false;
+        }
+
+        private void FilterByStatus(bool status)
+        {
+            foreach (DataGridViewRow row in dgvDetails.Rows)
+            {
+                row.Visible = true;
+                var productStatus = Convert.ToBoolean(row.Cells["Disabled"].Value);
+                if (productStatus !=status) row.Visible = false;
+
+                gridFiltered = true;
+            }
+        }
+
+        private void cmbFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (cmbFilter.SelectedIndex)
+            {
+                case 1:
+                    FilterByStatus(true);
+                    break;
+                case 2:
+                    FilterByStatus(false);
+                    break;
+                default:
+                    UnfilterGrid();
+                    break;
             }
         }
     }

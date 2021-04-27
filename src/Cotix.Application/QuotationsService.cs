@@ -13,6 +13,7 @@ namespace Cotix.AppLayer
     {
         private readonly IUnitOfWork _UoW;
         private readonly IRepository<Quotation> _quotationsRepo;
+        
         public QuotationsService(IUnitOfWork UoW)
         {
             _UoW = UoW;
@@ -55,6 +56,11 @@ namespace Cotix.AppLayer
             }
 
             return response;
+        }
+
+        public ICollection<Quotation> GetAll()
+        {
+            return _quotationsRepo.GetAll();
         }
     }
 }

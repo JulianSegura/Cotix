@@ -15,6 +15,7 @@ namespace Cotix.Infrastructure
         private const string CnString = "Server=(localdb)\\mssqllocaldb;Database=CotixDB;AttachDbFileName=" + path + "\\CotixBD.mdf;Trusted_Connection=True;MultipleActiveResultSets=true";
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
+            builder.UseLazyLoadingProxies();
             builder.UseSqlServer(CnString);
 
             base.OnConfiguring(builder);

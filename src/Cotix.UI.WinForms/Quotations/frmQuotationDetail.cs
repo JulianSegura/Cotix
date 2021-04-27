@@ -1,4 +1,5 @@
 ﻿using Cotix.AppLayer;
+using Cotix.AppLayer.Interfaces;
 using Cotix.Domain.Entities;
 using Cotix.Infrastructure;
 using System;
@@ -15,24 +16,23 @@ namespace Cotix.UI.WinForms.Quotations
 {
     public partial class frmQuotationDetail : Form
     {
-        //ToDo: Update Quotation
         //ToDo: Quotation Report
-        //ToDo: Program QuotationIndex Form (And add Filters: Customer, Date range)
 
         private readonly ProductsService _productService;
         private readonly CustomersService _customerService;
         private readonly QuotationsService _quotationService;
-        private readonly UnitOfWork _uow= new UnitOfWork();
+        
         private decimal QuotationSubTotal;
         private decimal TransportationCost;
         private decimal QuotationTotal;
 
-        public frmQuotationDetail()
+        public frmQuotationDetail(QuotationsService service, UnitOfWork UoW)
         {
             InitializeComponent();
-            _productService = new ProductsService(_uow);
-            _customerService = new CustomersService(_uow);
-            _quotationService = new QuotationsService(_uow);
+            _quotationService = service;
+            _productService = new ProductsService(UoW);
+            _customerService = new CustomersService(UoW);
+
         }
 
         private void chkAddTransportation_CheckedChanged(object sender, EventArgs e)
@@ -521,6 +521,7 @@ namespace Cotix.UI.WinForms.Quotations
                 MessageBox.Show($"Error al guardar la cotizacion\nError:{response.ErrorMessage}","COTIX",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
         }
+
         private bool ValidQuotationInfo()
         {
             if (cmbCustomerName.Items.Count < 1)

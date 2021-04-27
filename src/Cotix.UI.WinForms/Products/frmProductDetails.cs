@@ -14,10 +14,10 @@ namespace Cotix.UI.WinForms.Products
         private readonly string _picturesFolder = Path.GetDirectoryName(Application.ExecutablePath) + @"\Images\";
         private readonly ProductsService _productService;
 
-        public frmProductDetails(ProductsService service=null)
+        public frmProductDetails(ProductsService service)
         {
             InitializeComponent();
-            _productService = service != null ? service : new ProductsService(new UnitOfWork());
+            _productService = service;
         }
 
         private void pbProductPicture_MouseEnter(object sender, EventArgs e)
@@ -186,10 +186,7 @@ namespace Cotix.UI.WinForms.Products
         {
             if (File.Exists(PictureDestinationFilePath())) return;
 
-            if (Directory.Exists(_picturesFolder) == false)
-            {
-                Directory.CreateDirectory(_picturesFolder);
-            }
+            if (!Directory.Exists(_picturesFolder)) Directory.CreateDirectory(_picturesFolder);
 
             File.Copy(pbProductPicture.ImageLocation, PictureDestinationFilePath());
         }
