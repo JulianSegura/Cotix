@@ -51,6 +51,7 @@
     <Compile Include="LoggedUser.cs" />
     <Compile Include="ProductsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuotationsService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cotix.Domain\Cotix.Domain.csproj">

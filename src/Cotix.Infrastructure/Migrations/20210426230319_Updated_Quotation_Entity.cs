@@ -2,22 +2,22 @@
 
 namespace Cotix.Infrastructure.Migrations
 {
-    public partial class AddedDisabledToProductEntity : Migration
+    public partial class Updated_Quotation_Entity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<bool>(
-                name: "Disabled",
-                table: "Products",
+            migrationBuilder.AddColumn<decimal>(
+                name: "SubTotal",
+                table: "Quotations",
                 nullable: false,
-                defaultValue: false);
+                defaultValue: 0m);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Disabled",
-                table: "Products");
+                name: "SubTotal",
+                table: "Quotations");
         }
     }
 }

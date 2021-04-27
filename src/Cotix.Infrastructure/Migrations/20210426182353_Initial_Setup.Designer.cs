@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cotix.Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210423204614_Added_Company_Entity")]
-    partial class Added_Company_Entity
+    [Migration("20210426182353_Initial_Setup")]
+    partial class Initial_Setup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -56,23 +56,20 @@ namespace Cotix.Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("PhoneNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Email")
-                        .IsUnique()
-                        .HasFilter("[Email] IS NOT NULL");
-
                     b.HasIndex("Name")
-                        .IsUnique()
-                        .HasFilter("[Name] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Customers");
                 });
@@ -149,6 +146,9 @@ namespace Cotix.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TransportationFee")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("ValidUntil")

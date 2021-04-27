@@ -20,12 +20,13 @@ namespace Cotix.AppLayer
             _customersRepo = _UoW.CustomersRepo;
         }
 
-        public ResultResponse<Customer> Add(Customer customer)
+        public ServiceResponse<Customer> Add(Customer customer)
         {
-            var response = new ResultResponse<Customer>();
+            var response = new ServiceResponse<Customer>();
             try
             {
-                _customersRepo.Add(customer);
+                customer.ToUpper();
+                _customersRepo.Add(customer) ;
                 _UoW.Complete();
                 response.IsSuccessful = true;
                 response.ResultObject = customer;
@@ -38,7 +39,7 @@ namespace Cotix.AppLayer
             return response;
         }
 
-        public ICollection<Customer> GetActiveCustomers()
+        public ICollection<Customer> GetAll()
         {
             return _customersRepo.GetAll().ToList();
         }
@@ -47,6 +48,5 @@ namespace Cotix.AppLayer
         {
             return _customersRepo.Get(c => c.Name.ToUpper().Contains(searchParam.ToUpper()));
         }
-
     }
 }

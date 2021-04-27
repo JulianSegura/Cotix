@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using Cotix.AppLayer.Interfaces;
 using Cotix.Domain.Common;
@@ -37,7 +38,6 @@ namespace Cotix.AppLayer
             if (productCode != null)
             {
                 lst = _productsRepo.Get(p => p.Code == productCode.ToUpper()).ToList();
-                return lst;
             }
 
             if (productDesc != null)
@@ -45,15 +45,14 @@ namespace Cotix.AppLayer
                 lst = (from p in _productsRepo.GetAll()
                        where p.Description.Contains(productDesc)
                        select p).ToList();
-                return lst;
             }
 
             return lst;
         }
 
-        public ResultResponse<Product> Add(Product product)
+        public ServiceResponse<Product> Add(Product product)
         {
-            var response = new ResultResponse<Product>();
+            var response = new ServiceResponse<Product>();
             try
             {
                 _productsRepo.Add(product);
@@ -69,9 +68,9 @@ namespace Cotix.AppLayer
             return response;
         }
 
-        public ResultResponse<Product> Update(Product product)
+        public ServiceResponse<Product> Update(Product product)
         {
-            var response = new ResultResponse<Product>();
+            var response = new ServiceResponse<Product>();
             try
             {
                 _productsRepo.Update(product);
@@ -87,18 +86,20 @@ namespace Cotix.AppLayer
             return response;
         }
 
-        public bool Delete(int id)
+        public ServiceResponse<Product> Delete(int id)
         {
+            var response = new ServiceResponse<Product>();
             try
             {
                 _productsRepo.Delete(id);
                 _uow.Complete();
-                return true;
+                response.IsSuccessful = true;
             }
-            catch (Exception)
+            catch (SqlException e)
             {
-                return false;
+                response.SetException(e);
             }
+            return response;
         }
     }
 }

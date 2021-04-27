@@ -27,6 +27,7 @@ namespace Cotix.UI.WinForms.Products
         {
             using(frmProductDetails f= new frmProductDetails(_productService))
             {
+                //ToDo: Add delegate to subscribe to f's added product. So I can show it in the main form
                 f.ShowDialog();
 
                 if (f.Tag is null) return;
@@ -83,9 +84,15 @@ namespace Cotix.UI.WinForms.Products
             }
 
             //ToDo: Verify if product is added to any quotation
-            //Case true: Notify and offer to Disable
+            //Case true: Notify and offer to Disable//Exception #547 is foreign key delete constraint
             //Case false: Delete from DB 
             var productId = (int)dgvDetails.SelectedRows[0].Cells["Id"].Value;
+            var response = _productService.Delete(productId);
+
+            if (!response.IsSuccessful)
+            {
+                MessageBox.Show("Test");
+            }
         }
 
         private void dgvDetails_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -119,6 +126,7 @@ namespace Cotix.UI.WinForms.Products
             //Search by product code or by product description. 
             //If the seachParam is not in the product code or description I make the row invisible
             //that way I dont need to go the the database
+            //ToDo: Test this functionality in an extention method fof the datagrid view class
             foreach (DataGridViewRow row in dgvDetails.Rows)
             {
                 row.Visible = true;

@@ -3,7 +3,7 @@ using System;
 
 namespace Cotix.Domain.Common
 {
-    public class ResultResponse<T> where T: BaseEntity
+    public class ServiceResponse<T> where T : BaseEntity
     {
         public bool IsSuccessful { get; set; }
         public T ResultObject { get; set; }
