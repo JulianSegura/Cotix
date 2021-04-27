@@ -1,6 +1,7 @@
 ﻿using Cotix.AppLayer;
 using Cotix.Domain.Entities;
 using Cotix.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,6 +28,7 @@ namespace Cotix.UI.WinForms.Products
         {
             using(frmProductDetails f= new frmProductDetails(_productService))
             {
+                //ToDo: Add delegate to subscribe to f's added product. So I can show it in the main form
                 f.ShowDialog();
 
                 if (f.Tag is null) return;
@@ -78,14 +80,24 @@ namespace Cotix.UI.WinForms.Products
             //Verify anything selected on datagrid
             if (dgvDetails.SelectedRows.Count < 1)
             {
-                MessageBox.Show("Debe Seleccionar Un Producto A Borrar","COTIX");
+                MessageBox.Show("Debe Seleccionar Un Producto A Borrar","COTIX",MessageBoxButtons.OK,MessageBoxIcon.Warning);
                 return;
             }
 
-            //ToDo: Verify if product is added to any quotation
-            //Case true: Notify and offer to Disable
-            //Case false: Delete from DB 
             var productId = (int)dgvDetails.SelectedRows[0].Cells["Id"].Value;
+            var product = _productService.GetById(productId);
+
+            //Verify if product is added to any quotation
+            if (_productService.IsInQuotation(product))
+            {
+                //Case true: Notify
+                MessageBox.Show($"No se puede eliminar el producto. Ya esta en una cotizacion","COTIX",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                return;
+            }
+
+            //Case false: Delete from DB 
+            _productService.Delete(productId);
+            FillProductsDatagrid(_productService.GetAll());
         }
 
         private void dgvDetails_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -119,6 +131,7 @@ namespace Cotix.UI.WinForms.Products
             //Search by product code or by product description. 
             //If the seachParam is not in the product code or description I make the row invisible
             //that way I dont need to go the the database
+            //ToDo: Test this functionality in an extention method fof the datagrid view class
             foreach (DataGridViewRow row in dgvDetails.Rows)
             {
                 row.Visible = true;

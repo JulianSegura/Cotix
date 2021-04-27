@@ -161,17 +161,13 @@
   <ItemGroup>
     <Compile Include="DataContext.cs" />
     <Compile Include="Encoder.cs" />
-    <Compile Include="Migrations\20210421230410_Initial_Setup.cs" />
-    <Compile Include="Migrations\20210421230410_Initial_Setup.designer.cs">
-      <DependentUpon>20210421230410_Initial_Setup.cs</DependentUpon>
+    <Compile Include="Migrations\20210426182353_Initial_Setup.cs" />
+    <Compile Include="Migrations\20210426182353_Initial_Setup.designer.cs">
+      <DependentUpon>20210426182353_Initial_Setup.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20210422060430_Added-Disabled-To-Product-Entity.cs" />
-    <Compile Include="Migrations\20210422060430_Added-Disabled-To-Product-Entity.designer.cs">
-      <DependentUpon>20210422060430_Added-Disabled-To-Product-Entity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20210423204614_Added_Company_Entity.cs" />
-    <Compile Include="Migrations\20210423204614_Added_Company_Entity.designer.cs">
-      <DependentUpon>20210423204614_Added_Company_Entity.cs</DependentUpon>
+    <Compile Include="Migrations\20210426230319_Updated_Quotation_Entity.cs" />
+    <Compile Include="Migrations\20210426230319_Updated_Quotation_Entity.designer.cs">
+      <DependentUpon>20210426230319_Updated_Quotation_Entity.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DataContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

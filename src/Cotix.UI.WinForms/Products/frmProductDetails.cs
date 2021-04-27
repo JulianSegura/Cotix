@@ -75,11 +75,16 @@ namespace Cotix.UI.WinForms.Products
             {
                 if(pbProductPicture.ImageLocation!=null) SavePicture();
                 var another=MessageBox.Show("Producto Agregado Exitosamente\nDesea Agregar Otro Producto?","COTIX",buttons:MessageBoxButtons.YesNo);
-                Tag = true;
-                if (another != DialogResult.Yes) Close();
+                if (another != DialogResult.Yes) 
+                {
+                    Tag = true;
+                    Close();
+                } 
+                CleanForm();
+                txtProductCode.Focus();
                 return;
             }
-            MessageBox.Show($"Error Al Agregar El Producto\nError: {result.ErrorMessage}","COTIX");
+            MessageBox.Show($"Error Al Agregar El Producto\nError: {result.ErrorMessage}","COTIX",MessageBoxButtons.OK,MessageBoxIcon.Error);
         }
 
         private void UpdateProduct(Product product)
@@ -104,15 +109,15 @@ namespace Cotix.UI.WinForms.Products
             if (result.IsSuccessful)
             {
                 if (pictureChanged) SavePicture();
-                MessageBox.Show("Producto Actualizado Exitosamente");
+                MessageBox.Show("Producto Actualizado Exitosamente","COTIX",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 Tag = true;
                 Close();
                 return;
             }
-            MessageBox.Show($"Error Al Actualizar El Producto\nError: {result.ErrorMessage}","COTIX");
+            MessageBox.Show($"Error Al Actualizar El Producto\nError: {result.ErrorMessage}","COTIX",MessageBoxButtons.OK,MessageBoxIcon.Error);
         }
 
-        private bool HandleKey(ref TextBox textbox, char keycode)
+        private bool HandleNotDecimal(ref TextBox textbox, char keycode)
         {
             if (keycode == '.' && textbox.Text.Trim().Length == 0) return true;
 
@@ -123,12 +128,12 @@ namespace Cotix.UI.WinForms.Products
 
         private void txtCost_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = HandleKey(ref txtCost, e.KeyChar);
+            e.Handled = HandleNotDecimal(ref txtCost, e.KeyChar);
         }
 
         private void txtPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = HandleKey(ref txtPrice, e.KeyChar);
+            e.Handled = HandleNotDecimal(ref txtPrice, e.KeyChar);
         }
 
         private bool EmptyFields()

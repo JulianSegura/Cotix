@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using Cotix.AppLayer.Interfaces;
 using Cotix.Domain.Common;
@@ -11,11 +12,13 @@ namespace Cotix.AppLayer
     {
         private readonly IUnitOfWork _uow;
         private readonly IRepository<Product> _productsRepo;
+        private readonly IRepository<Quotation> _quotationsRepo;
 
         public ProductsService(IUnitOfWork UoW)
         {
             _uow = UoW;
             _productsRepo = _uow.ProductsRepo;
+            _quotationsRepo = _uow.QuotationsRepo;
         }
 
         public ICollection<Product> GetAll()
@@ -45,15 +48,14 @@ namespace Cotix.AppLayer
                 lst = (from p in _productsRepo.GetAll()
                        where p.Description.Contains(productDesc)
                        select p).ToList();
-                return lst;
             }
 
             return lst;
         }
 
-        public ResultResponse<Product> Add(Product product)
+        public ServiceResponse<Product> Add(Product product)
         {
-            var response = new ResultResponse<Product>();
+            var response = new ServiceResponse<Product>();
             try
             {
                 _productsRepo.Add(product);
@@ -69,9 +71,9 @@ namespace Cotix.AppLayer
             return response;
         }
 
-        public ResultResponse<Product> Update(Product product)
+        public ServiceResponse<Product> Update(Product product)
         {
-            var response = new ResultResponse<Product>();
+            var response = new ServiceResponse<Product>();
             try
             {
                 _productsRepo.Update(product);
@@ -99,6 +101,11 @@ namespace Cotix.AppLayer
             {
                 return false;
             }
+        }
+
+        public bool IsInQuotation(Product product)
+        {
+            return _quotationsRepo.Get(q => q.Details.Any(d => d.Product.Id == product.Id)).Any();
         }
     }
 }

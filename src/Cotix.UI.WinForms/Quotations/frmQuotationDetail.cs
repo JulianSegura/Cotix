@@ -15,8 +15,13 @@ namespace Cotix.UI.WinForms.Quotations
 {
     public partial class frmQuotationDetail : Form
     {
+        //ToDo: Update Quotation
+        //ToDo: Quotation Report
+        //ToDo: Program QuotationIndex Form (And add Filters: Customer, Date range)
+
         private readonly ProductsService _productService;
         private readonly CustomersService _customerService;
+        private readonly QuotationsService _quotationService;
         private readonly UnitOfWork _uow= new UnitOfWork();
         private decimal QuotationSubTotal;
         private decimal TransportationCost;
@@ -27,6 +32,7 @@ namespace Cotix.UI.WinForms.Quotations
             InitializeComponent();
             _productService = new ProductsService(_uow);
             _customerService = new CustomersService(_uow);
+            _quotationService = new QuotationsService(_uow);
         }
 
         private void chkAddTransportation_CheckedChanged(object sender, EventArgs e)
@@ -51,12 +57,17 @@ namespace Cotix.UI.WinForms.Quotations
 
         private void frmQuotationDetail_Load(object sender, EventArgs e)
         {
-            cmbCustomerName.Focus();
-
             FillProductsDatagrid(_productService.GetAll().Where(p => p.Disabled == false).ToList());
             
             dtpValidUntil.CustomFormat = "dd-MM-yyyy";
             dtpValidUntil.MinDate = DateTime.Today;
+            if(Tag is null)
+            {
+                lblQuotationNumberLabel.Visible = false;
+                lblQuotationNumber.Visible = false;
+            }
+
+            cmbCustomerName.Focus();
         }
 
         private void FillProductsDatagrid(ICollection<Product> products)
@@ -72,6 +83,7 @@ namespace Cotix.UI.WinForms.Quotations
             }
 
             dgvProducts.ClearSelection();
+            EnableSave(true);
         }
 
         private void dgvProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -81,7 +93,7 @@ namespace Cotix.UI.WinForms.Quotations
 
             if (!int.TryParse(dgvProducts.Rows[e.RowIndex].Cells["Qty"].Value.ToString(), out int qty))
             {
-                MessageBox.Show("Debe ingresar solo numeros en el campo cantidad", "COTIX");
+                MessageBox.Show("Debe ingresar solo numeros en el campo CANTIDAD", "COTIX",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 return;
             }
 
@@ -95,7 +107,7 @@ namespace Cotix.UI.WinForms.Quotations
 
             UpdateTotals();
             ShowTotals();
-
+            EnableSave(true);
         }
 
         private bool DataGridButtonClicked(object sender, DataGridViewCellEventArgs e)
@@ -114,7 +126,7 @@ namespace Cotix.UI.WinForms.Quotations
                 (bool exists, int index) = ProductIsInQuotation(product);
                 if (exists)
                 {
-                    var result = MessageBox.Show("El producto ya existe en la cotizacion\nActualizar la cantidad?", "Cotix", buttons: MessageBoxButtons.YesNo);
+                    var result = MessageBox.Show("El producto ya existe en la cotizacion\nActualizar la cantidad?", "COTIX", buttons: MessageBoxButtons.YesNo);
                     if (result == DialogResult.No) return;
 
                     dgvQuotationDetails.Rows[index].Cells["QuotationQty"].Value = quantity;
@@ -149,6 +161,7 @@ namespace Cotix.UI.WinForms.Quotations
             dgvQuotationDetails.Rows.RemoveAt(e.RowIndex);
             UpdateTotals();
             ShowTotals();
+            EnableSave(true);
         }
 
         private void BtnExportExcel_MouseEnter(object sender, EventArgs e)
@@ -169,6 +182,8 @@ namespace Cotix.UI.WinForms.Quotations
 
             var days = double.Parse(txtDaysValid.Text);
             dtpValidUntil.Value = DateTime.Today.AddDays(days);
+
+            EnableSave(true);
         }
 
         private void txtDaysValid_KeyPress(object sender, KeyPressEventArgs e)
@@ -223,6 +238,7 @@ namespace Cotix.UI.WinForms.Quotations
         {
             UpdateTotals();
             ShowTotals();
+            EnableSave(true);
         }
 
         private bool _gridFiltered;
@@ -246,7 +262,6 @@ namespace Cotix.UI.WinForms.Quotations
             string searchParam = txtProductSearch.Text.Trim().ToUpper();
             foreach (DataGridViewRow row in dgvProducts.Rows)
             {
-                row.Visible = true;
                 var productCode = row.Cells["ProductCode"].Value.ToString().ToUpper();
                 var productDesc = row.Cells["ProductDescription"].Value.ToString().ToUpper();
                 if (!productCode.Contains(searchParam) && !productDesc.Contains(searchParam)) row.Visible = false;
@@ -272,7 +287,7 @@ namespace Cotix.UI.WinForms.Quotations
 
             if (!double.TryParse(editedCell.Value.ToString(), out double qty))
             {
-                MessageBox.Show("Debe ingresar solo numeros en el campo cantidad", "COTIX");
+                MessageBox.Show("Debe ingresar solo numeros en el campo cantidad", "COTIX",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 editedCell.Value = _cellValueBeforeEdit;
                 return;
             }
@@ -283,33 +298,44 @@ namespace Cotix.UI.WinForms.Quotations
 
             UpdateTotals();
             ShowTotals();
+            EnableSave(true);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             if (Tag != null) Close();
             ClearForm();
+
+            UpdateTotals();
+            ShowTotals();
+
             cmbCustomerName.Focus();
         }
 
         private void ClearForm()
         {
+            chkAddTransportation.Checked = false;
+
             dgvQuotationDetails.Rows.Clear();
 
+            lblQuotationNumberLabel.Visible = false;
+            lblQuotationNumber.Visible = false;
             txtDaysValid.Clear();
             dtpValidUntil.Value = DateTime.Today;
 
             txtProductSearch.Clear();
 
-            chkAddTransportation.Checked = false;
+            cmbCustomerName.Items.Clear();
             cmbCustomerName.Text = "";
             txtCustomerCompany.Clear();
             txtCustomerEmail.Clear();
             txtCustomerPhone.Clear();
+            lblCustomerIdLabel.Visible = false;
+            lblCustomerId.Visible = false;
+            gbCustomerInfo.Enabled = true;
         }
 
         private bool _needUpdate = true;//used to verify if the items list on combobox needs to be updated.
-
         private void cmbCustomerName_TextChanged(object sender, EventArgs e)
         {
             if (cmbCustomerName.Text.Trim().Length < 4) _needUpdate = true;
@@ -366,16 +392,160 @@ namespace Cotix.UI.WinForms.Quotations
 
             lblCustomerNotAdded.Visible = false;
             btnAddCustomer.Visible = false;
+            txtProductSearch.Focus();
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {//This method is used to mimick tab key as the enter key for comboCustomer
+        {
+            //This method is used to mimick tab key as the enter key for comboCustomer
             if (this.cmbCustomerName.DroppedDown && keyData == Keys.Tab)
             {
                 SendKeys.Send("{ENTER}");
                 return true;
             }
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void btnAddCustomer_Click(object sender, EventArgs e)
+        {
+            if (!ValidCustomerInfo()) return;
+
+            var customer = new Customer
+            {
+                Name = cmbCustomerName.Text.Trim(),
+                Company = txtCustomerCompany.Text.Trim(),
+                PhoneNumber=txtCustomerPhone.Text.Trim(),
+                Email=txtCustomerEmail.Text.Trim()
+            };
+
+            var response = _customerService.Add(customer);
+
+            if (response.IsSuccessful)
+            {
+                MessageBox.Show("Cliente Agregado", "COTIX");
+                SelectAddedCustomer(response.ResultObject);
+                txtProductSearch.Focus();
+            }
+            else
+            {
+                MessageBox.Show($"Error al agregar el cliente\nError:{response.ErrorMessage}", "COTIX", MessageBoxButtons.OK, MessageBoxIcon.Error); ;
+            }
+        }
+
+        private bool ValidCustomerInfo()
+        {
+            if (cmbCustomerName.Text.Trim() == "")
+            {
+                MessageBox.Show("Ingrese el NOMBRE del cliente", "COTIX", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                return false;
+            }
+
+            if (txtCustomerCompany.Text.Trim() == "")
+            {
+                MessageBox.Show("Ingrese la COMPAÑIA del cliente", "COTIX", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            if (txtCustomerPhone.Text.Trim() == "")
+            {
+                MessageBox.Show("Ingrese un TELEFONO del cliente", "COTIX", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+
+        private void SelectAddedCustomer(Customer customer)
+        {
+            cmbCustomerName.Items.Clear();
+            cmbCustomerName.Items.Add(customer);
+
+            cmbCustomerName.ValueMember = "Id";
+            cmbCustomerName.DisplayMember = "Name";
+            cmbCustomerName.SelectedItem = customer;
+            cmbCustomerName_SelectionChangeCommitted(new object() , new EventArgs());
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            //Run Mandatory info validations
+            if (!ValidQuotationInfo()) return;
+
+            //Run warning info validations (date & transportation cost)
+
+            //Collect information
+            var quotation = Tag as Quotation ?? new Quotation();
+
+            quotation.Customer = (Customer)cmbCustomerName.SelectedItem;
+            quotation.ValidUntil = dtpValidUntil.Value;
+            foreach (DataGridViewRow row in dgvQuotationDetails.Rows)
+            {
+                quotation.Details.Add(new QuotationDetail
+                {
+                    Product = _productService.GetById(Convert.ToInt32(row.Cells["ProductId"].Value)),
+                    Quantity = Convert.ToInt32(row.Cells["QuotationQty"].Value),
+                    Amount = Convert.ToDecimal(row.Cells["PriceTotal"].Value.ToString().Replace("$",""))
+                }) ;
+            }
+
+            if (txtTransportationCost.Visible)
+            {
+                quotation.TransportationFee = Convert.ToDecimal(txtTransportationCost.Text);
+            }
+
+            quotation.SubTotal = QuotationSubTotal;
+            quotation.Total = QuotationTotal;
+
+            //Save Quotation
+            var response = Tag==null? _quotationService.Add(quotation):_quotationService.Update(quotation);
+
+            if (response.IsSuccessful)
+            {
+                MessageBox.Show("Cotizacion guardada","COTIX",MessageBoxButtons.OK,MessageBoxIcon.Information);
+
+                //Display Quotation info & handle appropiate controls enabling/disabling
+                gbCustomerInfo.Enabled = false;
+
+                lblQuotationNumberLabel.Visible = true;
+                lblQuotationNumber.Visible = true;
+                lblQuotationNumber.Text = response.ResultObject.Id.ToString();
+                txtDaysValid.Text = ((response.ResultObject.ValidUntil - response.ResultObject.CreatedAt).Days + 1).ToString();
+
+                btnExportPDF.Enabled = true;
+                btnExportExcel.Enabled = true;
+
+                EnableSave(false);
+                Tag = response.ResultObject;
+            }
+            else
+            {
+                MessageBox.Show($"Error al guardar la cotizacion\nError:{response.ErrorMessage}","COTIX",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
+        }
+        private bool ValidQuotationInfo()
+        {
+            if (cmbCustomerName.Items.Count < 1)
+            {
+                MessageBox.Show("Debe REGISTRAR EL CLIENTE antes de guardar la cotizacion", "COTIX", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            if (dgvQuotationDetails.Rows.Count < 1)
+            {
+                MessageBox.Show("Debe AGREGAR PRODUCTOS antes de guardar la cotizacion", "COTIX", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
+        }
+
+        private void EnableSave(bool value)
+        {
+            if (lblQuotationNumber.Visible) btnSave.Enabled = value;
+        }
+
+        private void dtpValidUntil_ValueChanged(object sender, EventArgs e)
+        {
+            EnableSave(true);
         }
     }
 }

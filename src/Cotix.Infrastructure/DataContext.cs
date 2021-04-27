@@ -11,7 +11,8 @@ namespace Cotix.Infrastructure
 {
     public class DataContext: DbContext
     {
-        private const string CnString = "Server=(localdb)\\mssqllocaldb;Database=CotixDB;Trusted_Connection=True;MultipleActiveResultSets=true";
+        const string path = @"C:\Users\JulianSegura\source\repos\Cotix\Data";
+        private const string CnString = "Server=(localdb)\\mssqllocaldb;Database=CotixDB;AttachDbFileName=" + path + "\\CotixBD.mdf;Trusted_Connection=True;MultipleActiveResultSets=true";
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             builder.UseSqlServer(CnString);
@@ -42,10 +43,9 @@ namespace Cotix.Infrastructure
             builder.Entity<User>().HasIndex(u => u.UserName).IsUnique();
             builder.Entity<User>().HasIndex(u => u.Name).IsUnique();
 
-            builder.Entity<Customer>().HasIndex(u => u.Name).IsUnique();
-            builder.Entity<Customer>().HasIndex(u => u.Email).IsUnique();
+            builder.Entity<Customer>().HasIndex(c => c.Name).IsUnique();
 
-            builder.Entity<Product>().HasIndex(u => u.Code).IsUnique();
+            builder.Entity<Product>().HasIndex(p => p.Code).IsUnique();
             #endregion
 
             //SeedDefaultData(builder);

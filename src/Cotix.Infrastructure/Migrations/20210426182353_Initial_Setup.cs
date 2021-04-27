@@ -8,16 +8,31 @@ namespace Cotix.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Company",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    Address = table.Column<string>(nullable: true),
+                    Phone = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Company", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Customers",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Disabled = table.Column<bool>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
+                    Company = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
                     Email = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    CellPhone = table.Column<string>(nullable: true)
+                    PhoneNumber = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -39,7 +54,8 @@ namespace Cotix.Infrastructure.Migrations
                     Specification = table.Column<string>(nullable: true),
                     Cost = table.Column<decimal>(nullable: false),
                     Price = table.Column<decimal>(nullable: false),
-                    PicturePath = table.Column<string>(nullable: true)
+                    PicturePath = table.Column<string>(nullable: true),
+                    Disabled = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -74,6 +90,7 @@ namespace Cotix.Infrastructure.Migrations
                     LastUpdatedAt = table.Column<DateTime>(nullable: false),
                     LastUpdatedBy = table.Column<int>(nullable: false),
                     ValidUntil = table.Column<DateTime>(nullable: false),
+                    TransportationFee = table.Column<decimal>(nullable: false),
                     Total = table.Column<decimal>(nullable: false),
                     CustomerId = table.Column<int>(nullable: true)
                 },
@@ -117,18 +134,10 @@ namespace Cotix.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Customers_Email",
-                table: "Customers",
-                column: "Email",
-                unique: true,
-                filter: "[Email] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Customers_Name",
                 table: "Customers",
                 column: "Name",
-                unique: true,
-                filter: "[Name] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_Code",
@@ -169,6 +178,9 @@ namespace Cotix.Infrastructure.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Company");
+
             migrationBuilder.DropTable(
                 name: "QuotationDetails");
 
