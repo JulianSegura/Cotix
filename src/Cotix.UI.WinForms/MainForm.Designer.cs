@@ -155,6 +155,7 @@ namespace Cotix.UI.WinForms
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "COTIX";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.pnlMainControls.ResumeLayout(false);
             this.ResumeLayout(false);

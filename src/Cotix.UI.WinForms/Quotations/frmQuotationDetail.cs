@@ -1,4 +1,5 @@
 ﻿using Cotix.AppLayer;
+using Cotix.AppLayer.Interfaces;
 using Cotix.Domain.Entities;
 using Cotix.Infrastructure;
 using System;
@@ -15,24 +16,23 @@ namespace Cotix.UI.WinForms.Quotations
 {
     public partial class frmQuotationDetail : Form
     {
-        //ToDo: Update Quotation
         //ToDo: Quotation Report
-        //ToDo: Program QuotationIndex Form (And add Filters: Customer, Date range)
 
         private readonly ProductsService _productService;
         private readonly CustomersService _customerService;
         private readonly QuotationsService _quotationService;
-        private readonly UnitOfWork _uow= new UnitOfWork();
+        
         private decimal QuotationSubTotal;
         private decimal TransportationCost;
         private decimal QuotationTotal;
 
-        public frmQuotationDetail()
+        public frmQuotationDetail(QuotationsService service, UnitOfWork UoW)
         {
             InitializeComponent();
-            _productService = new ProductsService(_uow);
-            _customerService = new CustomersService(_uow);
-            _quotationService = new QuotationsService(_uow);
+            _quotationService = service;
+            _productService = new ProductsService(UoW);
+            _customerService = new CustomersService(UoW);
+
         }
 
         private void chkAddTransportation_CheckedChanged(object sender, EventArgs e)
@@ -61,13 +61,54 @@ namespace Cotix.UI.WinForms.Quotations
             
             dtpValidUntil.CustomFormat = "dd-MM-yyyy";
             dtpValidUntil.MinDate = DateTime.Today;
-            if(Tag is null)
+
+            if (Tag != null)
             {
-                lblQuotationNumberLabel.Visible = false;
-                lblQuotationNumber.Visible = false;
+                lblQuotationNumberLabel.Visible = true;
+                lblQuotationNumber.Visible = true;
+                lblCustomerId.Visible = true;
+                lblCustomerIdLabel.Visible = true;
+                FillFormForUpdate();
             }
 
             cmbCustomerName.Focus();
+        }
+
+        private void FillFormForUpdate()
+        {
+            var quotation = Tag as Quotation;
+
+            //fillCustomerInfo
+            cmbCustomerName.Text = quotation.Customer.Name;
+            txtCustomerCompany.Text = quotation.Customer.Company;
+            txtCustomerPhone.Text = quotation.Customer.PhoneNumber;
+            txtCustomerEmail.Text = quotation.Customer.Email;
+            lblCustomerId.Text = quotation.Customer.Id.ToString();
+            gbCustomerInfo.Enabled = false;
+
+            //Fill txtvaliddays
+            txtDaysValid.Text = (quotation.ValidUntil.Date - quotation.CreatedAt.Date).Days.ToString();
+
+            //fill lblQuotationNumber
+            lblQuotationNumber.Text = quotation.Id.ToString();
+
+            //FillQuotationDatagrid
+            foreach (QuotationDetail detail in quotation.Details)
+            {
+                AddItemToQuotation(detail.Product, detail.Quantity);
+            }
+            //Fill txttransportationcost
+            if (quotation.TransportationFee > 0)
+            {
+                chkAddTransportation.Checked = true;
+                txtTransportationCost.Visible = true;
+                txtTransportationCost.Text = quotation.TransportationFee.ToString();
+            }
+            //calculate totals & show totals
+            UpdateTotals();
+            ShowTotals();
+            //disable save
+            EnableSave(false);
         }
 
         private void FillProductsDatagrid(ICollection<Product> products)
@@ -338,6 +379,8 @@ namespace Cotix.UI.WinForms.Quotations
         private bool _needUpdate = true;//used to verify if the items list on combobox needs to be updated.
         private void cmbCustomerName_TextChanged(object sender, EventArgs e)
         {
+            if (Tag != null) return;
+
             if (cmbCustomerName.Text.Trim().Length < 4) _needUpdate = true;
 
             if (cmbCustomerName.Text.Trim().Length < 4 || !_needUpdate) return;
@@ -475,8 +518,11 @@ namespace Cotix.UI.WinForms.Quotations
             //Collect information
             var quotation = Tag as Quotation ?? new Quotation();
 
-            quotation.Customer = (Customer)cmbCustomerName.SelectedItem;
+            var customerId = Convert.ToInt32(lblCustomerId.Text);
+            quotation.Customer = _customerService.GetById(customerId);
             quotation.ValidUntil = dtpValidUntil.Value;
+
+            quotation.Details.Clear();
             foreach (DataGridViewRow row in dgvQuotationDetails.Rows)
             {
                 quotation.Details.Add(new QuotationDetail
@@ -521,9 +567,10 @@ namespace Cotix.UI.WinForms.Quotations
                 MessageBox.Show($"Error al guardar la cotizacion\nError:{response.ErrorMessage}","COTIX",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
         }
+
         private bool ValidQuotationInfo()
         {
-            if (cmbCustomerName.Items.Count < 1)
+            if (gbCustomerInfo.Enabled && cmbCustomerName.Items.Count < 1)
             {
                 MessageBox.Show("Debe REGISTRAR EL CLIENTE antes de guardar la cotizacion", "COTIX", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -547,5 +594,7 @@ namespace Cotix.UI.WinForms.Quotations
         {
             EnableSave(true);
         }
+
+
     }
 }

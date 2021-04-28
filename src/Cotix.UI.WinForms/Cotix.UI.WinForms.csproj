@@ -211,6 +211,12 @@
     <Compile Include="Quotations\frmQuotationsIndex.Designer.cs">
       <DependentUpon>frmQuotationsIndex.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\frmReportViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\frmReportViewer.Designer.cs">
+      <DependentUpon>frmReportViewer.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="BaseForm.resx">
       <DependentUpon>BaseForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -236,6 +242,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Quotations\frmQuotationsIndex.resx">
       <DependentUpon>frmQuotationsIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\frmReportViewer.resx">
+      <DependentUpon>frmReportViewer.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

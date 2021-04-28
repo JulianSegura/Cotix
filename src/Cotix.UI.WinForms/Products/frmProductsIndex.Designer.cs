@@ -42,6 +42,9 @@ namespace Cotix.UI.WinForms.Products
             this.PicturePath = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Picture = new System.Windows.Forms.DataGridViewImageColumn();
             this.Disabled = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cmbFilter = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetails)).BeginInit();
             this.SuspendLayout();
@@ -50,6 +53,21 @@ namespace Cotix.UI.WinForms.Products
             // 
             this.lblRunningForm.Size = new System.Drawing.Size(121, 25);
             this.lblRunningForm.Text = "PRODUCTOS";
+            // 
+            // pnlMenu
+            // 
+            this.pnlMenu.Controls.Add(this.cmbFilter);
+            this.pnlMenu.Controls.Add(this.label1);
+            this.pnlMenu.Controls.Add(this.label4);
+            this.pnlMenu.Controls.SetChildIndex(this.lblRunningForm, 0);
+            this.pnlMenu.Controls.SetChildIndex(this.txtSearch, 0);
+            this.pnlMenu.Controls.SetChildIndex(this.btnNew, 0);
+            this.pnlMenu.Controls.SetChildIndex(this.btnEdit, 0);
+            this.pnlMenu.Controls.SetChildIndex(this.btnDelete, 0);
+            this.pnlMenu.Controls.SetChildIndex(this.btnSeach, 0);
+            this.pnlMenu.Controls.SetChildIndex(this.label4, 0);
+            this.pnlMenu.Controls.SetChildIndex(this.label1, 0);
+            this.pnlMenu.Controls.SetChildIndex(this.cmbFilter, 0);
             // 
             // btnSeach
             // 
@@ -197,6 +215,42 @@ namespace Cotix.UI.WinForms.Products
             this.Disabled.ReadOnly = true;
             this.Disabled.Width = 58;
             // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.label4.Location = new System.Drawing.Point(611, 9);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(180, 15);
+            this.label4.TabIndex = 21;
+            this.label4.Text = "Buscar Por Codigo o Descripcion";
+            // 
+            // cmbFilter
+            // 
+            this.cmbFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbFilter.FormattingEnabled = true;
+            this.cmbFilter.Location = new System.Drawing.Point(487, 24);
+            this.cmbFilter.Name = "cmbFilter";
+            this.cmbFilter.Size = new System.Drawing.Size(121, 29);
+            this.cmbFilter.TabIndex = 22;
+            this.cmbFilter.SelectedIndexChanged += new System.EventHandler(this.cmbFilter_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.label1.Location = new System.Drawing.Point(484, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(37, 15);
+            this.label1.TabIndex = 23;
+            this.label1.Text = "Filtrar";
+            // 
             // frmProductsIndex
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -227,5 +281,8 @@ namespace Cotix.UI.WinForms.Products
         private System.Windows.Forms.DataGridViewTextBoxColumn PicturePath;
         private System.Windows.Forms.DataGridViewImageColumn Picture;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Disabled;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cmbFilter;
+        private System.Windows.Forms.Label label1;
     }
 }

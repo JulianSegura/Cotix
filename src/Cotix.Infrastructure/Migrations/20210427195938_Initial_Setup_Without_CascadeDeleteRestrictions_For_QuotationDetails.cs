@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Cotix.Infrastructure.Migrations
 {
-    public partial class Initial_Setup : Migration
+    public partial class Initial_Setup_Without_CascadeDeleteRestrictions_For_QuotationDetails : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -90,9 +90,10 @@ namespace Cotix.Infrastructure.Migrations
                     LastUpdatedAt = table.Column<DateTime>(nullable: false),
                     LastUpdatedBy = table.Column<int>(nullable: false),
                     ValidUntil = table.Column<DateTime>(nullable: false),
+                    SubTotal = table.Column<decimal>(nullable: false),
                     TransportationFee = table.Column<decimal>(nullable: false),
                     Total = table.Column<decimal>(nullable: false),
-                    CustomerId = table.Column<int>(nullable: true)
+                    CustomerId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -130,7 +131,7 @@ namespace Cotix.Infrastructure.Migrations
                         column: x => x.QuotationId,
                         principalTable: "Quotations",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

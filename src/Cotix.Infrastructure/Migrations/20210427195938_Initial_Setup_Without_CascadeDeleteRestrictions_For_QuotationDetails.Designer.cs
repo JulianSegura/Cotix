@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cotix.Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210426230319_Updated_Quotation_Entity")]
-    partial class Updated_Quotation_Entity
+    [Migration("20210427195938_Initial_Setup_Without_CascadeDeleteRestrictions_For_QuotationDetails")]
+    partial class Initial_Setup_Without_CascadeDeleteRestrictions_For_QuotationDetails
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -136,7 +136,7 @@ namespace Cotix.Infrastructure.Migrations
                     b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CustomerId")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("LastUpdatedAt")
@@ -231,7 +231,9 @@ namespace Cotix.Infrastructure.Migrations
                 {
                     b.HasOne("Cotix.Domain.Entities.Customer", "Customer")
                         .WithMany("Quotations")
-                        .HasForeignKey("CustomerId");
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Cotix.Domain.Entities.QuotationDetail", b =>
@@ -242,7 +244,8 @@ namespace Cotix.Infrastructure.Migrations
 
                     b.HasOne("Cotix.Domain.Entities.Quotation", "Quotation")
                         .WithMany("Details")
-                        .HasForeignKey("QuotationId");
+                        .HasForeignKey("QuotationId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

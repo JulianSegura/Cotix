@@ -64,6 +64,7 @@ namespace Cotix.Infrastructure
                     e.CreatedBy = LoggedUser.Id;
                 }
             }
+            _dbSet.UpdateRange(entities);
         }
 
         public void Update(T entity)
@@ -73,6 +74,7 @@ namespace Cotix.Infrastructure
                 e.LastUpdatedAt = currentTime;
                 e.LastUpdatedBy = LoggedUser.Id;
             }
+            _dbSet.Update(entity);
         }
 
         public void Update(ICollection<T> entities)
@@ -85,6 +87,7 @@ namespace Cotix.Infrastructure
                     e.LastUpdatedBy = LoggedUser.Id;
                 }
             }
+            _dbSet.UpdateRange(entities);
         }
 
         public void Delete(int id)
