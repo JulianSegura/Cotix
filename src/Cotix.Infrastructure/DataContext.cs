@@ -30,7 +30,7 @@ namespace Cotix.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            #region Cascade_Delete
+            #region Cascade_Delete_Restrict
             var cascadeFKs = builder.Model.GetEntityTypes()
                             .SelectMany(t => t.GetForeignKeys())
                             .Where(fk => !fk.IsOwnership && fk.DeleteBehavior == DeleteBehavior.Cascade);
@@ -47,6 +47,8 @@ namespace Cotix.Infrastructure
             builder.Entity<Customer>().HasIndex(c => c.Name).IsUnique();
 
             builder.Entity<Product>().HasIndex(p => p.Code).IsUnique();
+
+            builder.Entity<QuotationDetail>().HasOne(q => q.Quotation).WithMany(d => d.Details).OnDelete(DeleteBehavior.Cascade);//Allow deletion of QuotationDetails
             #endregion
 
             //SeedDefaultData(builder);

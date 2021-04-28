@@ -267,8 +267,8 @@ namespace Cotix.UI.WinForms.Quotations
             // 
             this.dgvProducts.AllowUserToAddRows = false;
             this.dgvProducts.AllowUserToDeleteRows = false;
-            this.dgvProducts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgvProducts.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.dgvProducts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgvProducts.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvProducts.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvProducts.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvProducts.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
@@ -322,7 +322,7 @@ namespace Cotix.UI.WinForms.Quotations
             this.Id.Name = "Id";
             this.Id.ReadOnly = true;
             this.Id.Visible = false;
-            this.Id.Width = 23;
+            this.Id.Width = 42;
             // 
             // ProductCode
             // 
@@ -644,6 +644,7 @@ namespace Cotix.UI.WinForms.Quotations
             this.lblQuotationNumberLabel.Size = new System.Drawing.Size(45, 18);
             this.lblQuotationNumberLabel.TabIndex = 46;
             this.lblQuotationNumberLabel.Text = "No : ";
+            this.lblQuotationNumberLabel.Visible = false;
             // 
             // lblQuotationNumber
             // 
@@ -655,6 +656,7 @@ namespace Cotix.UI.WinForms.Quotations
             this.lblQuotationNumber.Size = new System.Drawing.Size(98, 18);
             this.lblQuotationNumber.TabIndex = 44;
             this.lblQuotationNumber.Text = "#Cotizacion";
+            this.lblQuotationNumber.Visible = false;
             // 
             // label14
             // 

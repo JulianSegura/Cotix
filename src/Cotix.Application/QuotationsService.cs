@@ -62,5 +62,24 @@ namespace Cotix.AppLayer
         {
             return _quotationsRepo.GetAll();
         }
+
+        public bool Delete(int id)
+        {
+            try
+            {
+                _quotationsRepo.Delete(id);
+                _UoW.Complete();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public Quotation GetById(int id)
+        {
+            return _quotationsRepo.GetById(id);
+        }
     }
 }

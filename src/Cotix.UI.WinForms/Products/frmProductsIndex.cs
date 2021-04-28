@@ -105,7 +105,12 @@ namespace Cotix.UI.WinForms.Products
             var confirm = MessageBox.Show("Seguro que desea ELIMINAR este producto?","COTIX",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
             if (confirm != DialogResult.Yes) return;
 
-            _productService.Delete(productId);
+            if (!_productService.Delete(productId))
+            {
+                MessageBox.Show("Error al eliminar el producto","COTIX",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                return;
+            }
+
             FillProductsDatagrid(_productService.GetAll());
         }
 

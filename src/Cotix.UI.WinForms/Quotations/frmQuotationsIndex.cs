@@ -15,8 +15,6 @@ namespace Cotix.UI.WinForms.Quotations
 {
     public partial class frmQuotationsIndex : BaseForm
     {
-        //ToDo: Program QuotationIndex Form (And add Filters: Customer, Date range)
-
         private readonly QuotationsService _quotationService;
         private readonly UnitOfWork _uow;
         public frmQuotationsIndex(UnitOfWork Uow)
@@ -31,7 +29,7 @@ namespace Cotix.UI.WinForms.Quotations
             using (frmQuotationDetail f = new frmQuotationDetail(_quotationService,_uow))
             {
                 f.ShowDialog();
-                //ToDo: Agregar condicion para verificar si algo cambio en la cotizacion
+                //ToDo: Add condition to check if something changed on the quotation so i can call the FillQuotationGrid method
             }
 
             FillQuotationsGrid();
@@ -72,11 +70,6 @@ namespace Cotix.UI.WinForms.Quotations
                     dgvDetails.Rows.Add(row);
                 }
             }
-        }
-
-        private void cmbFilterDate_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private bool gridFiltered;
@@ -151,6 +144,56 @@ namespace Cotix.UI.WinForms.Quotations
 
                 gridFiltered = true;
             }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (dgvDetails.SelectedRows.Count < 1)
+            {
+                MessageBox.Show("Debe Seleccionar Una Cotizacion A Borrar", "COTIX", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            var confirm = MessageBox.Show("Seguro que desea ELIMINAR ESTA COTIZACION?", "COTIX", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (confirm != DialogResult.Yes) return;
+
+            var quotationId = Convert.ToInt32(dgvDetails.SelectedRows[0].Cells["QuotationId"].Value);
+            if (!_quotationService.Delete(quotationId))
+            {
+                MessageBox.Show("Error al eliminar la cotizacion", "COTIX", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            FillQuotationsGrid();
+        }
+
+        private void dtpDateTo_ValueChanged(object sender, EventArgs e)
+        {
+            if (dtpDateTo.Value.Date < dtpDateFrom.Value.Date)
+            {
+                MessageBox.Show("La FECHA HASTA no puede ser menor que la FECHA DESDE", "COTIX", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                dtpDateTo.Value = dtpDateFrom.Value;
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (dgvDetails.SelectedRows.Count < 1)
+            {
+                MessageBox.Show("Debe Seleccionar Una Cotizacion para ACTUALIZAR", "COTIX", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            var id = Convert.ToInt32(dgvDetails.SelectedRows[0].Cells["QuotationId"].Value);
+            var quotation = _quotationService.GetById(id);
+
+            using (frmQuotationDetail f = new frmQuotationDetail(_quotationService, _uow))
+            {
+                f.Tag = quotation;
+                f.ShowDialog();
+                //ToDo: Add condition to check if something changed on the quotation so i can call the FillQuotationGrid method
+            }
+
+            FillQuotationsGrid();
         }
     }
 }

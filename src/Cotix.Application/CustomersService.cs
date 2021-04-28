@@ -48,5 +48,10 @@ namespace Cotix.AppLayer
         {
             return _customersRepo.Get(c => c.Name.ToUpper().Contains(searchParam.ToUpper()));
         }
+
+        public Customer GetById(int id)
+        {
+            return _customersRepo.GetById(id);
+        }
     }
 }

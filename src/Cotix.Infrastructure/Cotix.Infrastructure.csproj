@@ -168,13 +168,9 @@
   <ItemGroup>
     <Compile Include="DataContext.cs" />
     <Compile Include="Encoder.cs" />
-    <Compile Include="Migrations\20210426182353_Initial_Setup.cs" />
-    <Compile Include="Migrations\20210426182353_Initial_Setup.designer.cs">
-      <DependentUpon>20210426182353_Initial_Setup.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20210426230319_Updated_Quotation_Entity.cs" />
-    <Compile Include="Migrations\20210426230319_Updated_Quotation_Entity.designer.cs">
-      <DependentUpon>20210426230319_Updated_Quotation_Entity.cs</DependentUpon>
+    <Compile Include="Migrations\20210427195938_Initial_Setup_Without_CascadeDeleteRestrictions_For_QuotationDetails.cs" />
+    <Compile Include="Migrations\20210427195938_Initial_Setup_Without_CascadeDeleteRestrictions_For_QuotationDetails.designer.cs">
+      <DependentUpon>20210427195938_Initial_Setup_Without_CascadeDeleteRestrictions_For_QuotationDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DataContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
