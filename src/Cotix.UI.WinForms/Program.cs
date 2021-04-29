@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cotix.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,9 +15,18 @@ namespace Cotix.UI.WinForms
         [STAThread]
         static void Main()
         {
-            //Create a form for the instalation. It will create the database.
+            //ToDo: Create a form for initial configuration. It will create the database and configure admin user.
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            using (SqlLiteDataContext db = new SqlLiteDataContext())
+            {
+                if (!db.Database.CanConnect())
+                {
+                    db.Database.EnsureCreated();
+                }
+            }
+
             Application.Run(new frmMain());
         }
     }

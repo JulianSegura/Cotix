@@ -20,7 +20,7 @@ namespace Cotix.Infrastructure
 
         public UnitOfWork()
         {
-            if (_context == null) _context = new DataContext(); ;
+            if (_context == null) _context = new SqlLiteDataContext(); ;
         }
         public IRepository<User> UsersRepo
         {
