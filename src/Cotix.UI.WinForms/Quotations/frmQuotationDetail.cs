@@ -2,6 +2,7 @@
 using Cotix.AppLayer.Interfaces;
 using Cotix.Domain.Entities;
 using Cotix.Infrastructure;
+using Cotix.UI.WinForms.Reports;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,8 +17,6 @@ namespace Cotix.UI.WinForms.Quotations
 {
     public partial class frmQuotationDetail : Form
     {
-        //ToDo: Quotation Report
-
         private readonly ProductsService _productService;
         private readonly CustomersService _customerService;
         private readonly QuotationsService _quotationService;
@@ -108,6 +107,7 @@ namespace Cotix.UI.WinForms.Quotations
             UpdateTotals();
             ShowTotals();
             //disable save
+            btnExportPDF.Enabled = true;
             EnableSave(false);
         }
 
@@ -214,7 +214,7 @@ namespace Cotix.UI.WinForms.Quotations
         private void btnExportPDF_MouseEnter(object sender, EventArgs e)
         {
             ToolTip t = new ToolTip();
-            t.SetToolTip(btnExportPDF, "Exportar A PDF");
+            t.SetToolTip(btnExportPDF, "Exportar A PDF / Imprimir");
         }
 
         private void txtDaysValid_TextChanged(object sender, EventArgs e)
@@ -557,7 +557,6 @@ namespace Cotix.UI.WinForms.Quotations
                 txtDaysValid.Text = ((response.ResultObject.ValidUntil - response.ResultObject.CreatedAt).Days + 1).ToString();
 
                 btnExportPDF.Enabled = true;
-                btnExportExcel.Enabled = true;
 
                 EnableSave(false);
                 Tag = response.ResultObject;
@@ -595,6 +594,12 @@ namespace Cotix.UI.WinForms.Quotations
             EnableSave(true);
         }
 
-
+        private void btnExportPDF_Click(object sender, EventArgs e)
+        {
+            using (frmReportViewer f = new frmReportViewer(Tag as Quotation))
+            {
+                f.ShowDialog();
+            }
+        }
     }
 }

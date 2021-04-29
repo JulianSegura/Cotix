@@ -1,6 +1,7 @@
 ﻿using Cotix.AppLayer;
 using Cotix.Domain.Entities;
 using Cotix.Infrastructure;
+using Cotix.UI.WinForms.Reports;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -65,7 +66,8 @@ namespace Cotix.UI.WinForms.Quotations
                         quotation.ValidUntil.Date,
                         $"{quotation.SubTotal:C}",
                         $"{quotation.TransportationFee:C}",
-                        $"{quotation.Total:C}");
+                        $"{quotation.Total:C}",
+                        "Imprimir");
 
                     dgvDetails.Rows.Add(row);
                 }
@@ -194,6 +196,21 @@ namespace Cotix.UI.WinForms.Quotations
             }
 
             FillQuotationsGrid();
+        }
+
+        private void dgvDetails_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var sendergrid = (DataGridView)sender;
+
+            if (sendergrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            {
+                var quotationId = Convert.ToInt32(sendergrid.Rows[e.RowIndex].Cells["QuotationId"].Value);
+                var quotation = _quotationService.GetById(quotationId);
+                using (frmReportViewer f = new frmReportViewer(quotation))
+                {
+                    f.ShowDialog();
+                }
+            }
         }
     }
 }
