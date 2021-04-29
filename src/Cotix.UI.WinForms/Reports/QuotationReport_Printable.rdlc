@@ -785,17 +785,13 @@
           </Paragraphs>
           <rd:DefaultName>Textbox3</rd:DefaultName>
           <Top>2.12375in</Top>
-          <Height>0.20833in</Height>
+          <Height>0.17014in</Height>
           <Width>0.30556in</Width>
           <ZIndex>2</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
             </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
           </Style>
         </Textbox>
         <Textbox Name="QuotationNumber">
@@ -819,17 +815,13 @@
           </Paragraphs>
           <Top>2.12375in</Top>
           <Left>0.30556in</Left>
-          <Height>0.20833in</Height>
-          <Width>0.71181in</Width>
+          <Height>0.17014in</Height>
+          <Width>0.60216in</Width>
           <ZIndex>3</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
             </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
           </Style>
         </Textbox>
         <Textbox Name="DaysValid">
@@ -852,17 +844,13 @@
           </Paragraphs>
           <Top>2.12375in</Top>
           <Left>1.8745in</Left>
-          <Height>0.20833in</Height>
+          <Height>0.17014in</Height>
           <Width>0.27778in</Width>
           <ZIndex>4</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
             </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
           </Style>
         </Textbox>
         <Textbox Name="Textbox4">
@@ -886,7 +874,7 @@
           <rd:DefaultName>Textbox3</rd:DefaultName>
           <Top>2.12375in</Top>
           <Left>1.28075in</Left>
-          <Height>0.20833in</Height>
+          <Height>0.17014in</Height>
           <Width>0.59375in</Width>
           <ZIndex>5</ZIndex>
           <Style>
@@ -913,18 +901,14 @@
             </Paragraph>
           </Paragraphs>
           <Top>2.12375in</Top>
-          <Left>4.39014in</Left>
-          <Height>0.20833in</Height>
-          <Width>1.57638in</Width>
+          <Left>4.83875in</Left>
+          <Height>0.17014in</Height>
+          <Width>1.49414in</Width>
           <ZIndex>6</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
             </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
           </Style>
         </Textbox>
         <Textbox Name="Textbox5">
@@ -947,18 +931,14 @@
           </Paragraphs>
           <rd:DefaultName>Textbox3</rd:DefaultName>
           <Top>2.12375in</Top>
-          <Left>3.26861in</Left>
-          <Height>0.20833in</Height>
+          <Left>3.71722in</Left>
+          <Height>0.17014in</Height>
           <Width>1.12153in</Width>
           <ZIndex>7</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
             </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
           </Style>
         </Textbox>
         <Textbox Name="CompanyAddress">
@@ -1237,17 +1217,13 @@
           </Paragraphs>
           <Top>2.12375in</Top>
           <Left>2.16617in</Left>
-          <Height>0.20833in</Height>
-          <Width>0.36428in</Width>
+          <Height>0.17014in</Height>
+          <Width>0.31494in</Width>
           <ZIndex>17</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
             </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
           </Style>
         </Textbox>
         <Textbox Name="CompanyAddress2">
