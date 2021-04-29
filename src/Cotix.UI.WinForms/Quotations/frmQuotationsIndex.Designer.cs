@@ -29,11 +29,12 @@ namespace Cotix.UI.WinForms.Quotations
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dtpDateFrom = new System.Windows.Forms.DateTimePicker();
             this.dtpDateTo = new System.Windows.Forms.DateTimePicker();
             this.cmbFilterDate = new System.Windows.Forms.ComboBox();
@@ -50,6 +51,7 @@ namespace Cotix.UI.WinForms.Quotations
             this.QuotationSubTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.QuotationTransportation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.QuotationTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Print = new System.Windows.Forms.DataGridViewButtonColumn();
             this.pnlMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetails)).BeginInit();
             this.SuspendLayout();
@@ -202,14 +204,14 @@ namespace Cotix.UI.WinForms.Quotations
             this.dgvDetails.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvDetails.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvDetails.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDetails.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDetails.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDetails.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.QuotationId,
@@ -219,16 +221,17 @@ namespace Cotix.UI.WinForms.Quotations
             this.ValidUntil,
             this.QuotationSubTotal,
             this.QuotationTransportation,
-            this.QuotationTotal});
+            this.QuotationTotal,
+            this.Print});
             this.dgvDetails.Cursor = System.Windows.Forms.Cursors.Hand;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.CadetBlue;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDetails.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.CadetBlue;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDetails.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDetails.EnableHeadersVisualStyles = false;
             this.dgvDetails.Location = new System.Drawing.Point(0, 59);
@@ -236,19 +239,20 @@ namespace Cotix.UI.WinForms.Quotations
             this.dgvDetails.Name = "dgvDetails";
             this.dgvDetails.ReadOnly = true;
             this.dgvDetails.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDetails.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDetails.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvDetails.RowHeadersWidth = 15;
             this.dgvDetails.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvDetails.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDetails.Size = new System.Drawing.Size(1064, 543);
             this.dgvDetails.TabIndex = 3;
+            this.dgvDetails.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetails_CellContentClick);
             // 
             // QuotationId
             // 
@@ -273,9 +277,9 @@ namespace Cotix.UI.WinForms.Quotations
             // 
             // CreatedAt
             // 
-            dataGridViewCellStyle12.Format = "D";
-            dataGridViewCellStyle12.NullValue = null;
-            this.CreatedAt.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle2.Format = "D";
+            dataGridViewCellStyle2.NullValue = null;
+            this.CreatedAt.DefaultCellStyle = dataGridViewCellStyle2;
             this.CreatedAt.HeaderText = "CreatedAt";
             this.CreatedAt.Name = "CreatedAt";
             this.CreatedAt.ReadOnly = true;
@@ -284,9 +288,9 @@ namespace Cotix.UI.WinForms.Quotations
             // 
             // ValidUntil
             // 
-            dataGridViewCellStyle13.Format = "D";
-            dataGridViewCellStyle13.NullValue = null;
-            this.ValidUntil.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle3.Format = "D";
+            dataGridViewCellStyle3.NullValue = null;
+            this.ValidUntil.DefaultCellStyle = dataGridViewCellStyle3;
             this.ValidUntil.HeaderText = "Valida Hasta";
             this.ValidUntil.Name = "ValidUntil";
             this.ValidUntil.ReadOnly = true;
@@ -312,6 +316,20 @@ namespace Cotix.UI.WinForms.Quotations
             this.QuotationTotal.Name = "QuotationTotal";
             this.QuotationTotal.ReadOnly = true;
             this.QuotationTotal.Width = 66;
+            // 
+            // Print
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.SlateGray;
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            this.Print.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Print.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Print.HeaderText = "";
+            this.Print.Name = "Print";
+            this.Print.ReadOnly = true;
+            this.Print.Text = "IMPRIMIR";
+            this.Print.ToolTipText = "Imprimir/Exportar";
+            this.Print.Width = 5;
             // 
             // frmQuotationsIndex
             // 
@@ -350,5 +368,6 @@ namespace Cotix.UI.WinForms.Quotations
         private System.Windows.Forms.DataGridViewTextBoxColumn QuotationSubTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn QuotationTransportation;
         private System.Windows.Forms.DataGridViewTextBoxColumn QuotationTotal;
+        private System.Windows.Forms.DataGridViewButtonColumn Print;
     }
 }

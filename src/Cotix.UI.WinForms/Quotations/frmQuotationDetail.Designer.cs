@@ -783,6 +783,7 @@ namespace Cotix.UI.WinForms.Quotations
             this.btnExportPDF.Size = new System.Drawing.Size(22, 27);
             this.btnExportPDF.TabIndex = 2;
             this.btnExportPDF.UseVisualStyleBackColor = false;
+            this.btnExportPDF.Click += new System.EventHandler(this.btnExportPDF_Click);
             this.btnExportPDF.MouseEnter += new System.EventHandler(this.btnExportPDF_MouseEnter);
             // 
             // btnSave
