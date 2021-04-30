@@ -1,23 +1,20 @@
 ﻿using Cotix.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cotix.Infrastructure
 {
-    public class DataContext: DbContext
+    public class SqlLiteDataContext : DbContext
     {
-        //private const string CnString = "Server=(localdb)\\mssqllocaldb;Database=CotixDB;AttachDbFileName=" + path + "\\Data\\CotixBD.mdf;Trusted_Connection=True;MultipleActiveResultSets=true";
-        const string path = @"C:\Users\JulianSegura\source\repos\Cotix";//|DataDirectory|
-        private const string CnString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\JulianSegura\\source\\repos\\Cotix\\Data\\CotixDB.mdf;Integrated Security=True;Connect Timeout=30";
+        private readonly string _dataFile = "CotixDB.db";
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             builder.UseLazyLoadingProxies();
-            builder.UseSqlServer(CnString);
+            builder.UseSqlite(connectionString: $"Filename={_dataFile}", sqliteOptionsAction: op =>
+            {
+                op.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName);
+            });
 
             base.OnConfiguring(builder);
         }
@@ -54,6 +51,5 @@ namespace Cotix.Infrastructure
 
             //SeedDefaultData(builder);
         }
-
     }
 }

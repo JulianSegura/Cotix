@@ -39,10 +39,10 @@ namespace Cotix.UI.WinForms
                     Dock = DockStyle.Fill,
                     TopMost = false
                 };
-
                 pnlBody.Controls.Add(childForm);
                 childForm.Show();
             }
+
             childForm.BringToFront();
         }
 
