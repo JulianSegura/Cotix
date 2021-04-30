@@ -1,13 +1,9 @@
 ﻿using Cotix.AppLayer.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Cotix.Infrastructure
 {
-    public class Encoder: IEncode
+    public class Encoder : IEncode
     {
         public string HashString(string text)
         {

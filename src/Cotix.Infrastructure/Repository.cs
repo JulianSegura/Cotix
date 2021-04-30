@@ -54,13 +54,13 @@ namespace Cotix.Infrastructure
             _dbSet.Add(entity);
         }
 
-        public virtual void Add (ICollection<T> entities)
+        public virtual void Add(ICollection<T> entities)
         {
             foreach (var entity in entities)
             {
                 if (entity is AuditableEntity e)
                 {
-                    e.CreatedAt= currentTime;
+                    e.CreatedAt = currentTime;
                     e.CreatedBy = LoggedUser.Id;
                 }
             }

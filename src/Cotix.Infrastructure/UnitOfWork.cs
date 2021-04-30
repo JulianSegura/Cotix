@@ -2,10 +2,6 @@
 using Cotix.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cotix.Infrastructure
 {
@@ -24,7 +20,7 @@ namespace Cotix.Infrastructure
         }
         public IRepository<User> UsersRepo
         {
-            get 
+            get
             {
                 if (_usersRepo == null) _usersRepo = new Repository<User>(_context);
                 return _usersRepo;
@@ -68,7 +64,7 @@ namespace Cotix.Infrastructure
             {
                 throw;
             }
-            
+
         }
 
         public void Dispose()
