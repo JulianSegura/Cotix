@@ -11,7 +11,7 @@ namespace Cotix.UI.WinForms.Products
     public partial class frmProductDetails : Form
     {
         //ToDo: Try saving this on the settings file so i can use it in other forms.
-        private readonly string _picturesFolder = Path.GetDirectoryName(Application.ExecutablePath) + @"\Images\";
+        private readonly string _picturesFolder = @"C:\COTIX\Images\"; //Path.GetDirectoryName(Application.ExecutablePath) + @"\Images\";
         private readonly ProductsService _productService;
 
         public frmProductDetails(ProductsService service)
