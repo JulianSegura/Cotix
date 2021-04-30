@@ -7,7 +7,8 @@ namespace Cotix.Infrastructure
 {
     public class SqlLiteDataContext : DbContext
     {
-        private readonly string _dataFile = "CotixDB.db";
+        
+        private readonly string _dataFile = @"C:\COTIX\Data\CotixDB.db";
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             builder.UseLazyLoadingProxies();

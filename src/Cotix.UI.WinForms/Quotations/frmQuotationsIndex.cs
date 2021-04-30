@@ -29,6 +29,7 @@ namespace Cotix.UI.WinForms.Quotations
         {
             using (frmQuotationDetail f = new frmQuotationDetail(_quotationService,_uow))
             {
+                
                 f.ShowDialog();
                 //ToDo: Add condition to check if something changed on the quotation so i can call the FillQuotationGrid method
             }

@@ -206,10 +206,10 @@
               <Width>0.41792in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98062in</Width>
+              <Width>1.26237in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.88422in</Width>
+              <Width>1.60247in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.86676in</Width>
@@ -239,6 +239,7 @@
                               <Value>Item</Value>
                               <Style>
                                 <FontWeight>SemiBold</FontWeight>
+                                <Color>White</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -253,6 +254,8 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>#ca3a30</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -272,6 +275,7 @@
                               <Value>Codigo</Value>
                               <Style>
                                 <FontWeight>SemiBold</FontWeight>
+                                <Color>White</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -286,6 +290,8 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>#ca3a30</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -305,6 +311,7 @@
                               <Value>Descripcion</Value>
                               <Style>
                                 <FontWeight>SemiBold</FontWeight>
+                                <Color>White</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -319,6 +326,8 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>#ca3a30</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -338,6 +347,7 @@
                               <Value>Foto</Value>
                               <Style>
                                 <FontWeight>SemiBold</FontWeight>
+                                <Color>White</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -352,6 +362,8 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>#ca3a30</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -371,6 +383,7 @@
                               <Value>Qty</Value>
                               <Style>
                                 <FontWeight>SemiBold</FontWeight>
+                                <Color>White</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -385,6 +398,8 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>#ca3a30</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -404,6 +419,7 @@
                               <Value>Precio Unit.</Value>
                               <Style>
                                 <FontWeight>SemiBold</FontWeight>
+                                <Color>White</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -418,6 +434,8 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>#ca3a30</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -437,6 +455,7 @@
                               <Value>Total</Value>
                               <Style>
                                 <FontWeight>SemiBold</FontWeight>
+                                <Color>White</Color>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -451,6 +470,8 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <BackgroundColor>#ca3a30</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -1287,7 +1308,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Aqui va cualquier disclaimer</Value>
+                  <Value>- - - - - - - - - - - - - - - - - Gracias por preferirnos - - - - - - - - - - - - - - - - -</Value>
                   <Style />
                 </TextRun>
               </TextRuns>

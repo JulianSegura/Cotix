@@ -406,6 +406,9 @@ namespace Cotix.UI.WinForms.Quotations
             cmbCustomerName.AutoCompleteMode = AutoCompleteMode.Suggest;
             cmbCustomerName.DroppedDown = true;
             Cursor.Current = Cursors.Default;
+            cmbCustomerName.Text = searchParam; //These 3 lines are to avoid the writen text being deleted and reload the items so it wont crash the app
+            cmbCustomerName.SelectionStart = searchParam.Length;
+            cmbCustomerName.SelectionLength = 0;
         }
 
         private void cmbCustomerName_Leave(object sender, EventArgs e)
